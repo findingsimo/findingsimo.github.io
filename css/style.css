@@ -38,6 +38,10 @@ body {
 	color: #fff;
 	font-family: 'nexa_lightregular';
 }
+body.scrolled #maintable {
+	opacity: 0.2;
+    transition: opacity .75s;
+}
 
 .page-wrap {
 	clear: both;
