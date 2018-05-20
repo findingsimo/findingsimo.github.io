@@ -145,8 +145,3 @@ input[type='submit'] {
   background: transparent;
   cursor: pointer;
 }
-
-button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
-}
