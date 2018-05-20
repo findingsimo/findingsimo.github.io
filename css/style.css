@@ -157,7 +157,7 @@ a:active {
 	width: 11vh;
 	height: 11vh;
 	background-color: #0A0A0A;
-	animation: colorchange 10s infinite 10s ease-out;
+	animation: colorchange 15s infinite 10s ease-out;
 	transition: background-color 1.5s ease-out;
 }
 .divTableCell:hover {
@@ -167,61 +167,77 @@ a:active {
 
 @keyframes colorchange
     {
-      0%, 30%, 100%   {background-color: #0a0a0a;}
-      15%  {background-color: #fff;}
+      0%, 50%, 100%	{background-color: #0a0a0a;}
+      15%, 85%		{background-color: #fff;}
     }
 	
 
-.animate1s {
-	animation-delay: 1s;
+.animateA {
+	animation-delay: 0s;
 }	
 	
-.animate3s {
+.animateB {
+	animation-delay: 0.5s;
+}
+
+.animateC {
+	animation-delay: 1s;
+}
+
+.animateD {
+	animation-delay: 1.5s;
+}
+
+.animateE {
+	animation-delay: 2s;
+}
+
+.animateF {
+	animation-delay: 2.5s;
+}
+
+.animateG {
 	animation-delay: 3s;
 }
 
-.animate5s {
+.animateH {
+	animation-delay: 3.5s;
+}
+
+.animateI {
+	animation-delay: 4s;
+}
+
+.animateJ {
+	animation-delay: 4.5s;
+}
+
+.animateK {
 	animation-delay: 5s;
 }
 
-.animate7s {
+.animateL {
+	animation-delay: 5.5s;
+}
+
+.animateM {
+	animation-delay: 6s;
+}
+
+.animateN {
+	animation-delay: 6.5s;
+}
+
+.animateO {
 	animation-delay: 7s;
 }
 
-.animate9s {
-	animation-delay: 9s;
+.animateP {
+	animation-delay: 7.5s;
 }
 
-.animate11s {
-	animation-delay: 11s;
-}
-
-.animate13s {
-	animation-delay: 13s;
-}
-
-.animate15s {
-	animation-delay: 15s;
-}
-
-.animate17s {
-	animation-delay: 17s;
-}
-
-.animate19s {
-	animation-delay: 19s;
-}
-
-.animate21s {
-	animation-delay: 21s;
-}
-
-.animate23s {
-	animation-delay: 23s;
-}
-
-.animation25s {
-	animation-delay: 25s;
+.animateQ {
+	animation-delay: 8s;
 }
 
 .divTableHeading {
