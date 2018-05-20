@@ -69,6 +69,11 @@ body.scrolled #maintable {
 	border-radius: 100%;
 }
 
+.logo:hover {
+	transition: 0.75s;
+	transform: rotate(360deg);
+}
+
 h1 {
 	font-size: 48px;
 	text-transform: lowercase;
