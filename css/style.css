@@ -30,6 +30,79 @@
 }
 
 /* ============================================================
+  HTML & BODY
+============================================================ */
+
+body {
+	background-color: #0a0a0a;
+	color: #fff;
+	font-family: 'nexa_lightregular';
+}
+
+.page-wrap {
+	clear: both;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 20px;
+	top: 33.33%;
+	float: none;
+	width: 100%;
+    position: absolute;
+}
+
+.content {
+	text-align: center;
+	max-width: 480px;
+	margin: 0 auto;
+}
+
+.logo {
+	width: 128px;
+	height: 128px;
+	border: 4px solid #fff;
+	border-radius: 100%;
+	margin-top: -64px;
+}
+
+h1 {
+	font-size: 48px;
+	text-transform: lowercase;
+}
+
+h1 span {
+	font-family: 'nexa_boldregular';
+}
+
+ul.jobs {
+	text-transform: lowercase;
+	margin: 20px 0;
+}
+
+ul.nav {
+	text-align: center;
+}
+ul.nav li {
+	display: inline-block;
+	padding: 0 5px;
+	transition: border-bottom 1.5s ease-out;
+	border-bottom: 2px solid #0a0a0a;
+}
+
+ul.nav li:hover {
+	border-bottom: 2px solid #fff;
+}
+
+a, a:visited, a:hover {
+	font-family: 'nexa_boldregular';
+	color: #fff;
+	text-decoration: none;
+}
+
+a:active {
+	color: #ddd;
+}
+
+/* ============================================================
   TABLE
 ============================================================ */
 
@@ -157,79 +230,4 @@
 
 .hide {
 	visibility: visible;
-}
-
-/* ============================================================
-  HTML & BODY
-============================================================ */
-
-body {
-	background-color: #0a0a0a;
-	color: #fff;
-	font-family: 'nexa_lightregular';
-}
-
-.page-wrap {
-	clear: both;
-	width: 100%;
-	margin: 0 auto;
-	padding: 0 20px;
-	top: 33.33%;
-	float: none;
-	width: 100%;
-    position: absolute;
-    top: 33.33%;
-    padding: 0;
-}
-
-.content {
-	text-align: center;
-	max-width: 480px;
-	margin: 0 auto;
-}
-
-.logo {
-	width: 128px;
-	height: 128px;
-	border: 4px solid #fff;
-	border-radius: 100%;
-	margin-top: -64px;
-}
-
-h1 {
-	font-size: 48px;
-	text-transform: lowercase;
-}
-
-h1 span {
-	font-family: 'nexa_boldregular';
-}
-
-ul.jobs {
-	text-transform: lowercase;
-	margin: 20px 0;
-}
-
-ul.nav {
-	text-align: center;
-}
-ul.nav li {
-	display: inline-block;
-	padding: 0 5px;
-	transition: border-bottom 1.5s ease-out;
-	border-bottom: 2px solid #0a0a0a;
-}
-
-ul.nav li:hover {
-	border-bottom: 2px solid #fff;
-}
-
-a, a:visited, a:hover {
-	font-family: 'nexa_boldregular';
-	color: #fff;
-	text-decoration: none;
-}
-
-a:active {
-	color: #ddd;
 }
