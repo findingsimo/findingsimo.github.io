@@ -167,7 +167,7 @@ a:active {
 
 @keyframes colorchange
     {
-      0%, 50%, 100%	{background-color: #0a0a0a;}
+      0%, 30%, 50%, 100%	{background-color: #0a0a0a;}
       15%, 85%		{background-color: #fff;}
     }
 	
