@@ -36,6 +36,7 @@ h1 {
     color: white;
     font-size: 2em;
     user-select: none;
+    -webkit-user-select: none;
     cursor: pointer;
 }
 
