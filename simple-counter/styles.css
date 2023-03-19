@@ -43,7 +43,6 @@ h2 {
     user-select: none;
     -webkit-user-select: none;
     cursor: pointer;
-    transition: background-color 0.5s ease-in;
     transform-origin: center;
 }
 
