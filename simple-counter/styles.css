@@ -1,60 +1,24 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+let counter = document.getElementById('counter');
+let resetButton = document.getElementById('resetButton');
+let pressTimer;
+
+function startPress(event) {
+    event.preventDefault();
+    counter.style.backgroundColor = 'red';
+    pressTimer = setTimeout(incrementCounter, 500);
 }
 
-header {
-    position: absolute;
-    top: 20px;
-    text-align: center;
+function stopPress(event) {
+    event.preventDefault();
+    clearTimeout(pressTimer);
+    counter.style.backgroundColor = 'blue';
 }
 
-h1 {
-    margin-bottom: 5px;
+function incrementCounter() {
+    let currentCount = parseInt(counter.textContent);
+    counter.textContent = currentCount + 1;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 128px;
-    height: 128px;
-    border-radius: 50%;
-    background-color: blue;
-    color: white;
-    font-size: 2em;
-    user-select: none;
-    -webkit-user-select: none;
-    cursor: pointer;
-}
-
-.button-container {
-    position: absolute;
-    bottom: 20px;
-}
-
-#resetButton {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-}
+resetButton.addEventListener('click', function() {
+    counter.textContent = 0;
+});
