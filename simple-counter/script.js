@@ -15,6 +15,7 @@ function loadCount() {
 function startPress() {
     counter.style.backgroundColor = '#383838';
     counter.style.transform = 'scale(1.25)';
+    counter.style.transition = 'background-color 0.3s ease-in 0.2s, transform 0.2s ease-in';
     pressTimer = setTimeout(incrementCounter, 500);
 }
 
@@ -22,6 +23,7 @@ function stopPress() {
     clearTimeout(pressTimer);
     counter.style.backgroundColor = '#2D2D2D';
     counter.style.transform = 'scale(1)';
+    counter.style.transition = 'background-color 0.05s ease-in, transform 0.05s ease-in';
 }
 
 function incrementCounter() {
