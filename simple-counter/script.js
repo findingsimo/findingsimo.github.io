@@ -13,14 +13,14 @@ function loadCount() {
 }
 
 function startPress() {
-    counter.style.backgroundColor = 'red';
+    counter.style.backgroundColor = '#383838';
     counter.style.transform = 'scale(1.25)';
     pressTimer = setTimeout(incrementCounter, 500);
 }
 
 function stopPress() {
     clearTimeout(pressTimer);
-    counter.style.backgroundColor = 'blue';
+    counter.style.backgroundColor = '#2D2D2D';
     counter.style.transform = 'scale(1)';
 }
 
