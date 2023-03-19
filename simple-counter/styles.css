@@ -1,12 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #222;
+    color: #fff;
 }
 
 header {
@@ -19,6 +20,10 @@ h1 {
     margin-bottom: 5px;
 }
 
+h2 {
+    font-size: 1em;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -29,16 +34,16 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 128px;
-    height: 128px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-    background-color: blue;
+    background-color: #2D2D2D;
     color: white;
-    font-size: 2em;
+    font-size: 2.5em;
     user-select: none;
     -webkit-user-select: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease-in;
     transform-origin: center;
 }
 
@@ -48,7 +53,7 @@ h1 {
 }
 
 #resetButton {
-    background-color: #4CAF50;
+    background-color: #2D2D2D;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -59,4 +64,10 @@ h1 {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#resetButton:hover, #resetButton:active {
+    background-color: #3b3b3b;
 }
