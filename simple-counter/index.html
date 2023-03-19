@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Counter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Simple Counter</h1>
+        <h2>Long press to increase count</h2>
+    </header>
+    <div class="container">
+        <div class="circle" id="counter" onmousedown="startPress()" onmouseup="stopPress()" ontouchstart="startPress()" ontouchend="stopPress()">
+            0
+        </div>
+    </div>
+    <div class="button-container">
+        <button id="resetButton">Reset</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
