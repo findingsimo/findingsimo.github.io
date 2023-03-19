@@ -68,6 +68,6 @@ h2 {
     -webkit-user-select: none;
 }
 
-#resetButton:hover, #resetButton:active {
+#resetButton:active {
     background-color: #3b3b3b;
 }
