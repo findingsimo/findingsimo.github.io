@@ -2,12 +2,14 @@ let counter = document.getElementById('counter');
 let resetButton = document.getElementById('resetButton');
 let pressTimer;
 
-function startPress() {
+function startPress(event) {
+    event.preventDefault();
     counter.style.backgroundColor = 'red';
     pressTimer = setTimeout(incrementCounter, 500);
 }
 
-function stopPress() {
+function stopPress(event) {
+    event.preventDefault();
     clearTimeout(pressTimer);
     counter.style.backgroundColor = 'blue';
 }
