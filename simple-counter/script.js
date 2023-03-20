@@ -26,6 +26,12 @@ function getColorSchemeStyles() {
   }
 }
 
+function vibrateDevice(duration) {
+  if ('vibrate' in navigator) {
+    navigator.vibrate(duration);
+  }
+}
+
 function startPress() {
   const styles = getColorSchemeStyles();
   counter.style.backgroundColor = styles.backgroundColor;
@@ -47,6 +53,8 @@ function incrementCounter() {
   let newCount = currentCount + 1;
   counter.textContent = newCount;
   localStorage.setItem('count', newCount); // Store the updated count in localStorage
+
+  vibrateDevice(50); // Vibrate the device for 50 milliseconds
 }
 
 resetButton.addEventListener('click', function () {
