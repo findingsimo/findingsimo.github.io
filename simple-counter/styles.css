@@ -156,5 +156,7 @@ h2 {
         background-color: #E5E5E5;
         color: #222;
     }
-
+    #resetButton:active {
+        background-color: #DBDBDB;
+    }
 }
