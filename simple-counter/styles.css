@@ -49,14 +49,14 @@ h2 {
 
 .button-container {
     position: absolute;
-    bottom: 20px;
+    bottom: 30px;
 }
 
 #resetButton {
     background-color: #2D2D2D;
     border: none;
     color: white;
-    padding: 10px 20px 20px;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
