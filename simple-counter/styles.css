@@ -70,3 +70,90 @@ h2 {
 #resetButton:active {
     background-color: #3b3b3b;
 }
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #222;
+    color: #fff;
+}
+
+header {
+    position: absolute;
+    top: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 1em;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-color: #2D2D2D;
+    color: white;
+    font-size: 2.5em;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    transform-origin: center;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 20px;
+}
+
+#resetButton {
+    background-color: #2D2D2D;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#resetButton:active {
+    background-color: #3b3b3b;
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #fff;
+        color: #222;
+    }
+    .circle {
+        background-color: #E5E5E5;
+        color: #222;
+    }
+    #resetButton {
+        background-color: #E5E5E5;
+        color: #222;
+
+}
