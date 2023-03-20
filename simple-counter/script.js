@@ -54,6 +54,20 @@ resetButton.addEventListener('click', function () {
   localStorage.setItem('count', 0); // Reset the count in localStorage
 });
 
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((registration) => {
+        console.log('Service Worker registered successfully:', registration);
+      })
+      .catch((error) => {
+        console.log('Service Worker registration failed:', error);
+      });
+  }
+}
+
+
 function setupColorSchemeListener() {
   if (window.matchMedia) {
     const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -66,3 +80,4 @@ function setupColorSchemeListener() {
 
 loadCount(); // Load the count when the page is loaded
 setupColorSchemeListener(); // Set up the listener for color scheme changes
+registerServiceWorker(); // Register the service worker
