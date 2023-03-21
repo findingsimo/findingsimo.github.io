@@ -8,16 +8,16 @@ body {
     margin: 0;
     background-color: #222;
     color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 header {
     position: absolute;
     top: 20px;
     text-align: center;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
 }
 
 h1 {
@@ -45,10 +45,6 @@ h2 {
     background-color: #2D2D2D;
     color: white;
     font-size: 2.5em;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
     cursor: pointer;
     transform-origin: center;
 }
@@ -70,10 +66,7 @@ h2 {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
+
 }
 
 #resetButton:active {
