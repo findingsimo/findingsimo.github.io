@@ -78,6 +78,7 @@ h2 {
 
 #resetButton:focus {
     outline: none !important;
+    background-color: #3b3b3b;
 }
 
 @media (prefers-color-scheme: light) {
@@ -93,7 +94,7 @@ h2 {
         background-color: #E5E5E5;
         color: #222;
     }
-    #resetButton:active {
+    #resetButton:active, #resetButton:focus {
         background-color: #DBDBDB;
     }
 }
