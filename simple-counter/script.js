@@ -111,7 +111,7 @@ function setupColorSchemeListener() {
     colorSchemeQuery.addListener(() => {
       // Update styles when the color scheme changes
       stopPress(); // Reset styles based on the new color scheme
-      applyResetButtonStyles(); // Update resetButton styles based on the new color scheme
+      setActiveState(resetButton, false); // Update the reset button's color scheme
     });
   }
 }
