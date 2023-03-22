@@ -117,6 +117,5 @@ function setupColorSchemeListener() {
 }
 
 loadCount(); // Load the count when the page is loaded
-applyResetButtonStyles(); // Apply the initial styles to resetButton
 setupColorSchemeListener(); // Set up the listener for color scheme changes
 registerServiceWorker(); // Register the service worker
