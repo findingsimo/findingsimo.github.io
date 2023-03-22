@@ -1,13 +1,13 @@
 const cacheName = 'simple-counter-cache-v1';
 const assetsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/script.js',
-  '/manifest.json',
+  '/simple-counter',
+  '/simple-counter/index.html',
+  '/simple-counter/styles.css',
+  '/simple-counter/script.js',
+  'simple-counter/manifest.json',
   // Add the paths to your app's icons here
-  '/icon-192x192.png',
-  '/icon-512x512.png'
+  '/simple-counter/icon-192x192.png',
+  '/simple-counter/icon-512x512.png'
 ];
 
 self.addEventListener('install', (event) => {
