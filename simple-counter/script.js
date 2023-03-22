@@ -88,8 +88,4 @@ function setupColorSchemeListener() {
 
 loadCount(); // Load the count when the page is loaded
 setupColorSchemeListener(); // Set up the listener for color scheme changes
-<<<<<<< HEAD
 registerServiceWorker(); // Register the service worker
-=======
-registerServiceWorker(); // Register the service worker
->>>>>>> parent of 223f7ac (Minor updates)
