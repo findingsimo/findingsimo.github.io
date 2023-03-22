@@ -2,7 +2,6 @@ let counter = document.getElementById('counter');
 let resetButton = document.getElementById('resetButton');
 let pressTimer;
 
-// Load the count from localStorage or set it to 0 if it doesn't exist
 function loadCount() {
   let storedCount = localStorage.getItem('count');
   if (storedCount === null) {
@@ -57,9 +56,40 @@ function incrementCounter() {
   vibrateDevice(50); // Vibrate the device for 50 milliseconds
 }
 
+
 resetButton.addEventListener('click', function () {
   counter.textContent = 0;
   localStorage.setItem('count', 0); // Reset the count in localStorage
+});
+
+function setActiveState(element, isActive) {
+  const colorScheme = getColorSchemeStyles();
+
+  if (isActive) {
+    element.style.backgroundColor = colorScheme.backgroundColor;
+  } else {
+    element.style.backgroundColor = colorScheme.backgroundColorReleased;
+  }
+}
+
+resetButton.addEventListener('touchstart', function () {
+  setActiveState(resetButton, true);
+});
+
+resetButton.addEventListener('touchend', function () {
+  setActiveState(resetButton, false);
+});
+
+resetButton.addEventListener('mousedown', function () {
+  setActiveState(resetButton, true);
+});
+
+resetButton.addEventListener('mouseup', function () {
+  setActiveState(resetButton, false);
+});
+
+resetButton.addEventListener('mouseleave', function () {
+  setActiveState(resetButton, false);
 });
 
 function registerServiceWorker() {
@@ -75,17 +105,18 @@ function registerServiceWorker() {
   }
 }
 
-
 function setupColorSchemeListener() {
   if (window.matchMedia) {
     const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
     colorSchemeQuery.addListener(() => {
       // Update styles when the color scheme changes
       stopPress(); // Reset styles based on the new color scheme
+      applyResetButtonStyles(); // Update resetButton styles based on the new color scheme
     });
   }
 }
 
 loadCount(); // Load the count when the page is loaded
+applyResetButtonStyles(); // Apply the initial styles to resetButton
 setupColorSchemeListener(); // Set up the listener for color scheme changes
 registerServiceWorker(); // Register the service worker
