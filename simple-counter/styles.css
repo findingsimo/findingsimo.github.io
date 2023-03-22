@@ -71,6 +71,8 @@ h2 {
 
 #resetButton:active {
     background-color: #3b3b3b;
+    transform-origin: center;
+    transform: scale(1.25);
 }
 
 #resetButton:focus {
