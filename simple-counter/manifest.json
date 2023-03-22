@@ -3,7 +3,6 @@
   "short_name": "Simple Counter",
   "description": "A simple counter app that increases the count with a long press",
   "start_url": "https://findingsimo.com/simple-counter/",
-  "scope": "/simple-counter/",
   "display": "standalone",
   "background_color": "#222",
   "theme_color": "#222",
