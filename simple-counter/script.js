@@ -1,3 +1,5 @@
+(function() {
+
 let counter = document.getElementById('counter');
 let resetButton = document.getElementById('resetButton');
 let pressTimer;
@@ -89,3 +91,5 @@ function setupColorSchemeListener() {
 loadCount(); // Load the count when the page is loaded
 setupColorSchemeListener(); // Set up the listener for color scheme changes
 registerServiceWorker(); // Register the service worker
+
+})();
