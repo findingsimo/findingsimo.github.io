@@ -25,8 +25,10 @@ async function readClipboard() {
             return;
         }
         const text = await navigator.clipboard.readText();
-        if (isHexColor(text) && colorValues.length < 5 && !colorValues.includes(text)) {
-            colorValues.push(text);
+        const lowerCaseColorValues = colorValues.map(color => color.toLowerCase());
+        const lowerCaseText = text.toLowerCase();
+        if (isHexColor(lowerCaseText) && colorValues.length < 5 && !lowerCaseColorValues.includes(lowerCaseText)) {
+            colorValues.push(lowerCaseText);
             updateColorList();
         }
     } catch (err) {
