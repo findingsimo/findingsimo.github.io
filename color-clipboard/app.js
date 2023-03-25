@@ -27,14 +27,18 @@ async function readClipboard() {
         const text = await navigator.clipboard.readText();
         const lowerCaseColorValues = colorValues.map(color => color.toLowerCase());
         const lowerCaseText = text.toLowerCase();
-        if (isHexColor(lowerCaseText) && colorValues.length < 5 && !lowerCaseColorValues.includes(lowerCaseText)) {
-            colorValues.push(lowerCaseText);
+        if (isHexColor(lowerCaseText) && !lowerCaseColorValues.includes(lowerCaseText)) {
+            if (colorValues.length >= 5) {
+                colorValues.shift(); // Remove the first item
+            }
+            colorValues.push(lowerCaseText); // Add the new color value to the end
             updateColorList();
         }
     } catch (err) {
         console.error('Failed to read clipboard:', err);
     }
 }
+
 
 function updateColorList() {
     colorList.innerHTML = "";
