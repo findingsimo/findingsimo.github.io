@@ -1,10 +1,15 @@
+// Get the colorList element from the DOM
 const colorList = document.getElementById("colorList");
+
+// Initialize an array to store color values
 let colorValues = [];
 
+// Function to check if a given string is a valid hex color
 function isHexColor(hex) {
     return /^#([0-9A-F]{3}){1,2}$/i.test(hex);
 }
 
+// Function to request clipboard read permission
 async function requestClipboardPermission() {
     try {
         const { state } = await navigator.permissions.query({ name: "clipboard-read" });
@@ -17,6 +22,7 @@ async function requestClipboardPermission() {
     return false;
 }
 
+// Function to read the clipboard content
 async function readClipboard() {
     try {
         const hasPermission = await requestClipboardPermission();
@@ -39,6 +45,7 @@ async function readClipboard() {
     }
 }
 
+// Function to copy text to the clipboard
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text)
         .then(() => {
@@ -49,6 +56,7 @@ function copyToClipboard(text) {
         });
 }
 
+// Function to show a toast notification with a given message
 function showToast(message) {
     const toast = document.createElement("div");
     toast.textContent = message;
@@ -63,6 +71,7 @@ function showToast(message) {
     }, 2000);
 }
 
+// Function to update the color list displayed in the app
 function updateColorList() {
     colorList.innerHTML = "";
     colorValues.forEach(color => {
@@ -79,8 +88,26 @@ function updateColorList() {
     });
 }
 
+// Event listener for visibility change
 document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
         readClipboard();
     }
 });
+
+// Function to apply dark mode based on the system theme setting
+function applyDarkMode() {
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    if (prefersDarkScheme.matches) {
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark-mode");
+    }
+}
+
+// Call the applyDarkMode function on page load
+applyDarkMode();
+
+// Update the theme when the system theme setting changes
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyDarkMode);

@@ -76,3 +76,25 @@ li:hover {
 .fade-out {
     opacity: 0;
 }
+
+body.dark-mode {
+    background-color: #2d3436;
+    color: #fff;
+}
+
+header.dark-mode {
+    border-bottom: 1px solid #636e72;
+}
+
+li.dark-mode:hover {
+    background-color: #636e7250;
+}
+
+.dark-mode .color-preview {
+    border: 1px solid #636e72;
+}
+
+.toast.dark-mode {
+    background-color: #fff;
+    color: #2d3436;
+}
