@@ -1,8 +1,8 @@
 // Get the colorList element from the DOM
 const colorList = document.getElementById("colorList");
 
-// Initialize an array to store color values
-let colorValues = [];
+// Load colorValues from localStorage, or initialize an empty array if no data is stored
+let colorValues = JSON.parse(localStorage.getItem("colorValues")) || [];
 
 // Function to check if a given string is a valid hex color
 function isHexColor(hex) {
@@ -38,6 +38,7 @@ async function readClipboard() {
                 colorValues.shift(); // Remove the first item
             }
             colorValues.push(lowerCaseText); // Add the new color value to the end
+            saveColorValues(); // Save the updated color values to localStorage
             updateColorList();
         }
     } catch (err) {
@@ -111,3 +112,11 @@ applyDarkMode();
 
 // Update the theme when the system theme setting changes
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyDarkMode);
+
+// Function to save color values to localStorage
+function saveColorValues() {
+    localStorage.setItem("colorValues", JSON.stringify(colorValues));
+}
+
+// Call updateColorList on page load to display the stored color values
+updateColorList();
