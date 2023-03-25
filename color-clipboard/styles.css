@@ -51,6 +51,10 @@ li:hover {
     background-color: #dfe6e950;
 }
 
+li:active {
+    background-color: #dfe6e9;
+}
+
 .color-preview {
     width: 32px;
     height: 32px;
@@ -88,6 +92,10 @@ header.dark-mode {
 
 li.dark-mode:hover {
     background-color: #636e7250;
+}
+
+li.dark-mode:active {
+    background-color: #636e72;
 }
 
 .dark-mode .color-preview {
