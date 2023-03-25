@@ -13,7 +13,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid #b2bec3;
+    border-bottom: 1px solid #dfe6e9;
     padding: 1rem;
     text-align: center;
 }
@@ -54,7 +54,7 @@ li:hover {
 .color-preview {
     width: 32px;
     height: 32px;
-    border: 1px solid #b2bec3;
+    border: 1px solid #dfe6e9;
     border-radius: 4px;
     margin-right: 1rem;
 }
