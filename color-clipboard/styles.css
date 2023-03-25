@@ -69,7 +69,7 @@ li:active {
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #2d3436;
+    background-color: #dfe6e950;
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -104,6 +104,6 @@ body.dark-mode .color-preview {
 }
 
 body.dark-mode .toast {
-    background-color: #fff;
+    background-color: #636e7250;
     color: #2d3436;
 }
