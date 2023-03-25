@@ -1,17 +1,37 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #dfe6e9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header {
-    background-color: #333;
-    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #b2bec3;
+    color: #2d3436;
     padding: 1rem;
     text-align: center;
+}
+
+#logo {
+    height: 32px;
+    margin-right: 1rem;
+}
+
+h1 {
+    font-size: 1.5rem;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+}
+
+header, ul {
+    max-width: 360px;
 }
 
 li {
