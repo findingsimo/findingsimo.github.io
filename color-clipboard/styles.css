@@ -29,7 +29,7 @@ h1 {
 
 ul {
     list-style-type: none;
-    padding: 0;
+    padding: .5rem;
 }
 
 header, ul {
@@ -51,9 +51,8 @@ li:hover {
 .color-preview {
     width: 32px;
     height: 32px;
-    border: 1px solid #b2bec3;
+    border: 1px solid #2d3436;
     border-radius: 4px;
-    padding: .5rem;
     margin-right: 1rem;
 }
 
