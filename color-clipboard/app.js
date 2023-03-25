@@ -39,6 +39,29 @@ async function readClipboard() {
     }
 }
 
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            showToast("Value copied");
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+}
+
+function showToast(message) {
+    const toast = document.createElement("div");
+    toast.textContent = message;
+    toast.classList.add("toast");
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("fade-out");
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 500);
+    }, 2000);
+}
 
 function updateColorList() {
     colorList.innerHTML = "";
@@ -49,6 +72,9 @@ function updateColorList() {
         colorPreview.style.backgroundColor = color;
         li.appendChild(colorPreview);
         li.appendChild(document.createTextNode(color));
+        li.addEventListener("click", () => {
+            copyToClipboard(color);
+        });
         colorList.appendChild(li);
     });
 }
