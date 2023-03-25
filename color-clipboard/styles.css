@@ -45,6 +45,7 @@ li {
     padding: .5rem;
     border-radius: 4px;
     cursor: pointer;
+    transition: ease-in .1s;
 }
 
 li:hover {
