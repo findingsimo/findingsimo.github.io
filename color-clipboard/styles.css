@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #dfe6e9;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,10 +41,16 @@ li {
     margin-bottom: 1rem;
 }
 
+li:hover {
+    background-color: #dfe6e9;
+}
+
 .color-preview {
     width: 32px;
     height: 32px;
-    border-radius: 8px;
+    border: 1px solid #b2bec3;
+    border-radius: 4px;
+    padding: .5rem;
     margin-right: 1rem;
 }
 
@@ -54,7 +60,7 @@ li {
     left: 50%;
     transform: translateX(-50%);
     background-color: #2d3436;
-    color: #dfe6e9;
+    color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     opacity: 0.9;
