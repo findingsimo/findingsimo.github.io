@@ -86,23 +86,23 @@ body.dark-mode {
     color: #fff;
 }
 
-header.dark-mode {
+body.dark-mode header {
     border-bottom: 1px solid #636e72;
 }
 
-li.dark-mode:hover {
+body.dark-mode li:hover {
     background-color: #636e7250;
 }
 
-li.dark-mode:active {
+body.dark-mode li:active {
     background-color: #636e72;
 }
 
-.dark-mode .color-preview {
+body.dark-mode .color-preview {
     border: 1px solid #636e72;
 }
 
-.toast.dark-mode {
+body.dark-mode .toast {
     background-color: #fff;
     color: #2d3436;
 }
