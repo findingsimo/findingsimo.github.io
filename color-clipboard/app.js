@@ -25,7 +25,7 @@ async function readClipboard() {
             return;
         }
         const text = await navigator.clipboard.readText();
-        if (isHexColor(text) && colorValues.length < 5) {
+        if (isHexColor(text) && colorValues.length < 5 && !colorValues.includes(text)) {
             colorValues.push(text);
             updateColorList();
         }
