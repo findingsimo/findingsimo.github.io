@@ -9,38 +9,18 @@
 
 
 /* ============================================================
-  EMBEDDING FONTS
-============================================================ */
-
-@font-face {
-    font-family: 'nexa_boldregular';
-    src: url('Nexa-Bold.woff2') format('woff2'),
-        url('Nexa-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'nexa_lightregular';
-    src: url('Nexa_Free_Light-webfont.woff2') format('woff2'),
-         url('Nexa_Free_Light-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-/* ============================================================
   HTML & BODY
 ============================================================ */
 
 body {
 	background-color: #0a0a0a;
 	color: #fff;
-	font-family: 'nexa_lightregular';
+	font-family: 'Poppins';
+	font-weight: 300;
 }
 body.scrolled #maintable {
 	opacity: 0.2;
-    transition: opacity .75s;
+    	transition: opacity .75s;
 }
 
 .page-wrap {
@@ -80,7 +60,7 @@ h1 {
 }
 
 h1 span {
-	font-family: 'nexa_boldregular';
+	font-weight: 600;
 }
 
 ul.jobs {
@@ -103,7 +83,6 @@ ul.nav li:hover {
 }
 
 a, a:visited, a:hover {
-	font-family: 'nexa_boldregular';
 	color: #fff;
 	text-decoration: none;
 }
