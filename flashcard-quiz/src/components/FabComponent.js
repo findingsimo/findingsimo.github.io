@@ -28,7 +28,7 @@ const FabComponent = (props) => {
 
   return (
     <div>
-      <Fab color="primary" aria-label="add" style={{ position: 'fixed', bottom: '20px', right: '20px' }} onClick={handleClickOpen}>
+      <Fab color="primary" aria-label="add" style={{ position: 'fixed', bottom: '20px', right: '20px', marginRight: `calc(50% - min(320px, 50%))` }} onClick={handleClickOpen}>
         <Add />
       </Fab>
       <Dialog open={open} onClose={handleClose}>
