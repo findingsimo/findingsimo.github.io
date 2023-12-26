@@ -18,6 +18,7 @@ const App = () => {
   const [testCardIndex, setTestCardIndex] = useState(null);
   const [testStatus, setTestStatus] = useState({ passedTests: 0, totalTests: 10, nextTest: null, showButtons: true });
   const [archive, setArchive] = useState(JSON.parse(localStorage.getItem('archive')) || []); // New state for archived cards
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(cards));
@@ -148,7 +149,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
     <div style={{ minHeight: '100vh' }}>
-      <Header />
+    <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <TabComponent 
         cards={cards} 
         archive={archive} 
@@ -157,6 +158,7 @@ const App = () => {
         setEditCardIndex={setEditCardIndex} 
         setDeleteCardIndex={setDeleteCardIndex} 
         setTestCardIndex={setTestCardIndex} 
+        searchTerm={searchTerm}
       />
       <FabComponent addCard={addCard} editCard={editCard} editIndex={editCardIndex} />
       {viewCard && 

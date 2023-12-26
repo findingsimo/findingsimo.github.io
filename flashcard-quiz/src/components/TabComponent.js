@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tabs, Tab, Box, Typography } from '@mui/material';
 import Flashcard from './Flashcard';
 
-const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, setDeleteCardIndex, setTestCardIndex }) => {
+const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, setDeleteCardIndex, setTestCardIndex, searchTerm }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -11,6 +11,9 @@ const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, 
 
   // Calculate the number of in-progress cards
   const inProgressCount = cards.filter(card => card.testStatus.testInProgress).length;
+
+  const filteredCards = cards.filter(card => card.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredArchive = archive.filter(card => card.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <div>
@@ -67,8 +70,8 @@ const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, 
         />
       </Tabs>
       {value === 0 && (
-        <Box p={3}>
-          {cards.map((card, index) => (
+      <Box p={3}>
+        {filteredCards.map((card, index) => (
             <Flashcard 
                 key={index} 
                 card={card} 
@@ -81,8 +84,8 @@ const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, 
         </Box>
       )}
       {value === 1 && (
-        <Box p={3}>
-            {archive.map((card, index) => (
+      <Box p={3}>
+        {filteredArchive.map((card, index) => (
                 <Flashcard 
                 key={index} 
                 card={card} 
