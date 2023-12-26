@@ -15,91 +15,106 @@ const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, 
   const filteredCards = cards.filter(card => card.title.toLowerCase().includes(searchTerm.toLowerCase()));
   const filteredArchive = archive.filter(card => card.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
+  const sortCards = (a, b) => {
+    if (a.testStatus.testInProgress && !b.testStatus.testInProgress) {
+      return -1;
+    }
+    if (!a.testStatus.testInProgress && b.testStatus.testInProgress) {
+      return 1;
+    }
+    return new Date(a.testStatus.nextTest) - new Date(b.testStatus.nextTest);
+  };
+
+  const sortedCards = [...filteredCards].sort(sortCards);
+
   return (
     <div>
       <Tabs value={value} onChange={handleChange} centered >
         <Tab 
-        label={
+          label={
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            Tests
-            {cards.length > 0 && (
+              Tests
+              {cards.length > 0 && (
                 <Typography 
-                variant="button" 
-                sx={{ marginLeft: '10px', opacity: 0.75 }}
+                  variant="button" 
+                  sx={{ marginLeft: '10px', opacity: 0.75 }}
                 >
-                {cards.length}
+                  {cards.length}
                 </Typography>
-            )}
-            {/* Display the number of in-progress cards */}
-            {inProgressCount > 0 && (
-              <Box 
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginLeft: '10px',
-                  height: '20px',
-                  width: '20px',
-                  borderRadius: '50%',
-                  backgroundColor: '#e74c3c', // Replace with your theme's primary color
-                  color: 'white' // Replace with your theme's contrast text color for primary color
-                }}
-              >
-                <Typography variant="button">
-                  {inProgressCount}
-                </Typography>
-              </Box>
-            )}
+              )}
+              {/* Display the number of in-progress cards */}
+              {inProgressCount > 0 && (
+                <Box 
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginLeft: '10px',
+                    height: '20px',
+                    width: '20px',
+                    borderRadius: '50%',
+                    backgroundColor: '#e74c3c', // Replace with your theme's primary color
+                    color: 'white' // Replace with your theme's contrast text color for primary color
+                  }}
+                >
+                  <Typography variant="button">
+                    {inProgressCount}
+                  </Typography>
+                </Box>
+              )}
             </Box>
-        } 
+          } 
         />
         <Tab 
-        label={
+          label={
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            Archive
-            {archive.length > 0 && (
+              Archive
+              {archive.length > 0 && (
                 <Typography 
-                variant="button" 
-                sx={{ marginLeft: '10px', opacity: 0.75 }}
+                  variant="button" 
+                  sx={{ marginLeft: '10px', opacity: 0.75 }}
                 >
-                {archive.length}
+                  {archive.length}
                 </Typography>
-            )}
+              )}
             </Box>
-        } 
+          } 
         />
       </Tabs>
       {value === 0 && (
-      <Box p={3}>
-        {filteredCards.map((card, index) => (
-            <Flashcard 
+        <Box p={3}>
+          {sortedCards.map((card) => {
+            const index = filteredCards.indexOf(card);
+            return (
+              <Flashcard 
                 key={index} 
                 card={card} 
                 onView={() => setViewCard(card)} 
                 onEdit={() => setEditCardIndex(index)} 
                 onDelete={() => setDeleteCardIndex(index)} 
                 onTest={() => setTestCardIndex(index)}
+              />
+            );
+          })}
+        </Box>
+      )}
+      {value === 1 && (
+        <Box p={3}>
+          {filteredArchive.map((card, index) => (
+            <Flashcard 
+              key={index} 
+              card={card} 
+              index={index} 
+              onView={() => setViewCard(card)} 
+              onEdit={() => setEditCardIndex(index)} 
+              onDelete={() => setDeleteCardIndex(index)} 
+              onTest={() => setTestCardIndex(index)}
+              onRetry={onRetry} 
+              isArchived={true} 
             />
           ))}
         </Box>
       )}
-      {value === 1 && (
-      <Box p={3}>
-        {filteredArchive.map((card, index) => (
-                <Flashcard 
-                key={index} 
-                card={card} 
-                index={index} 
-                onView={() => setViewCard(card)} 
-                onEdit={() => setEditCardIndex(index)} 
-                onDelete={() => setDeleteCardIndex(index)} 
-                onTest={() => setTestCardIndex(index)}
-                onRetry={onRetry} 
-                isArchived={true} 
-              />
-            ))}
-        </Box>
-        )}
     </div>
   );
 };
