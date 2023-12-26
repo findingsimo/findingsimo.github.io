@@ -19,10 +19,15 @@ const App = () => {
   const [testStatus, setTestStatus] = useState({ passedTests: 0, totalTests: 10, nextTest: null, showButtons: true });
   const [archive, setArchive] = useState(JSON.parse(localStorage.getItem('archive')) || []); // New state for archived cards
   const [searchTerm, setSearchTerm] = useState('');
+  const intervals = [5, 15, 32, 72, 160, 360, 792, 1700, 3840, 8440];
 
   useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(cards));
   }, [cards]);
+
+  useEffect(() => {
+    localStorage.setItem('archive', JSON.stringify(archive));
+  }, [archive]);
 
   useEffect(() => {
     const timers = cards.map((card, index) => {
@@ -73,7 +78,7 @@ const App = () => {
 
   const addCard = (title, content) => {
     const nextTest = new Date();
-    nextTest.setMinutes(nextTest.getMinutes() + 5); // Set nextTest to 5 minutes from now
+    nextTest.setMinutes(nextTest.getMinutes() + intervals[0]); // Set nextTest to the first interval from now
     setCards(prevCards => [...prevCards, { title, content, testStatus: { passedTests: 0, totalTests: 10, nextTest, testInProgress: false } }]);
   };
 
@@ -91,9 +96,11 @@ const App = () => {
         return card;
       }
       const nextTest = new Date();
-      nextTest.setMinutes(nextTest.getMinutes() + 5); // Set nextTest to 5 minutes from now
       if (content.trim() === card.content.trim()) { // Trim the content strings before comparing
         const newPassedTests = card.testStatus.passedTests + 1;
+        if (newPassedTests < intervals.length) {
+          nextTest.setMinutes(nextTest.getMinutes() + intervals[newPassedTests]); // Set nextTest to the next interval from now
+        }
         if (newPassedTests === 10) { // If progress is 10/10
           setArchive(prevArchive => [...prevArchive, { ...card, testStatus: { ...card.testStatus, passedTests: newPassedTests, nextTest, testInProgress: false } }]); // Add the card to archive
           return null; // Remove the card from cards
@@ -108,6 +115,7 @@ const App = () => {
           }
         };
       }
+      nextTest.setMinutes(nextTest.getMinutes() + intervals[card.testStatus.passedTests]); // Set nextTest to the current interval from now
       return {
         ...card,
         testStatus: {
@@ -139,7 +147,7 @@ const App = () => {
   const retryCard = (index) => {
     const cardToRetry = archive[index];
     const nextTest = new Date();
-    nextTest.setMinutes(nextTest.getMinutes() + 5); // Set nextTest to 5 minutes from now
+    nextTest.setMinutes(nextTest.getMinutes() + intervals[0]); // Set nextTest to the first interval from now
     cardToRetry.testStatus = { passedTests: 0, totalTests: 10, nextTest, testInProgress: false }; // Reset the progress state
     setCards(prevCards => [...prevCards, cardToRetry]); // Add the card back to the Tests tab
     setArchive(prevArchive => prevArchive.filter((card, i) => i !== index)); // Remove the card from the archive

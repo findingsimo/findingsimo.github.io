@@ -8,12 +8,12 @@ const Header = ({ searchTerm, setSearchTerm }) => {
     const theme = useTheme();
     
     return (
-      <AppBar position="static" sx={{ backgroundColor: theme.palette.primary.main }}>
+      <AppBar position="static" enableColorOnDark >
         <Box display="flex" justifyContent="center">
           <Toolbar style={{ maxWidth: 640, width: '100%', justifyContent: 'space-between' }}>
             {!isSearching && (
               <Typography variant="h6">
-                Flashcard Quiz
+                Spatium
               </Typography>
             )}
             {isSearching 
