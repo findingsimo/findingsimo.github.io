@@ -7,6 +7,8 @@ import EditCardModal from './components/EditCardModal';
 import DeleteConfirmationModal from './components/DeleteConfirmationModal';
 import TestCardModal from './components/TestCardModal';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 
 const App = () => {
   const [cards, setCards] = useState(JSON.parse(localStorage.getItem('cards')) || []);
@@ -40,13 +42,33 @@ const App = () => {
     return () => timers.forEach(timer => timer && clearTimeout(timer));
   }, [cards, testCardIndex]); // Add testCardIndex to the dependency array
 
-  const theme = createTheme({
+  const lightTheme = createTheme({
     palette: {
+      mode: 'light',
       primary: {
-        main: '#e74c3c', // Replace '#ff7f50' with your desired color
+        main: '#e74c3c',
+      },
+      background: {
+        default: '#FAFCFC',
       },
     },
   });
+  
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#e74c3c',
+      },
+      background: {
+        default: '#303030',
+      },
+    },
+  });
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = prefersDarkMode ? darkTheme : lightTheme;
 
   const addCard = (title, content) => {
     const nextTest = new Date();
@@ -124,7 +146,8 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <div style={{ backgroundColor: '#FAFCFC', minHeight: '100vh' }}>
+      <CssBaseline />
+    <div style={{ minHeight: '100vh' }}>
       <Header />
       <TabComponent 
         cards={cards} 

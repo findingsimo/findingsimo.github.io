@@ -26,14 +26,14 @@ const Flashcard = ({ card, index, onView, onEdit, onDelete, onTest, onRetry, isA
 
   return (
 <Box maxWidth={640} margin="auto">
-  <Card style={{ marginBottom: '20px', boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)', paddingBottom: isArchived ? 0 : '10px' }} onClick={testStatus.testInProgress ? () => onTest(card) : null}>
+  <Card style={{ marginBottom: '20px', boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)', paddingBottom: isArchived ? 0 : '4px' }} onClick={testStatus.testInProgress ? () => onTest(card) : null}>
     <CardContent>
       <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: isArchived ? 0 : '20px' }}>
             <Typography variant="h6">{card.title}</Typography>
             {testStatus.testInProgress ? (
               <FiberManualRecordIcon color="primary" />
             ) : (
-              <Box>
+                <Box>
                 {isArchived && (
                   <IconButton onClick={handleOpenRetryModal}>
                     <Refresh /> 
@@ -42,9 +42,11 @@ const Flashcard = ({ card, index, onView, onEdit, onDelete, onTest, onRetry, isA
                 <IconButton onClick={(e) => {e.stopPropagation(); onView(card);}}>
                   <VisibilityIcon />
                 </IconButton>
-                <IconButton onClick={(e) => {e.stopPropagation(); onEdit(card);}}>
-                  <Edit />
-                </IconButton>
+                {!isArchived && (
+                  <IconButton onClick={(e) => {e.stopPropagation(); onEdit(card);}}>
+                    <Edit />
+                  </IconButton>
+                )}
                 <IconButton onClick={(e) => {e.stopPropagation(); onDelete(card);}}>
                   <Delete />
                 </IconButton>
