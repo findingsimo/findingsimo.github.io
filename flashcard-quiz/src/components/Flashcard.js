@@ -34,17 +34,17 @@ const Flashcard = ({ card, index, onView, onEdit, onDelete, onTest, onRetry, isA
               <FiberManualRecordIcon color="primary" />
             ) : (
                 <Box>
-                {isArchived && (
-                  <IconButton onClick={handleOpenRetryModal}>
-                    <Refresh /> 
-                  </IconButton>
-                )}
                 <IconButton onClick={(e) => {e.stopPropagation(); onView(card);}}>
                   <VisibilityIcon />
                 </IconButton>
                 {!isArchived && (
                   <IconButton onClick={(e) => {e.stopPropagation(); onEdit(card);}}>
                     <Edit />
+                  </IconButton>
+                )}
+                 {isArchived && (
+                  <IconButton onClick={handleOpenRetryModal}>
+                    <Refresh /> 
                   </IconButton>
                 )}
                 <IconButton onClick={(e) => {e.stopPropagation(); onDelete(card);}}>

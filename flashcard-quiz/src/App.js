@@ -9,6 +9,7 @@ import TestCardModal from './components/TestCardModal';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { CssBaseline } from '@mui/material';
+import NotificationModal from './components/NotificationModal';
 
 const App = () => {
   const [cards, setCards] = useState(JSON.parse(localStorage.getItem('cards')) || []);
@@ -20,6 +21,7 @@ const App = () => {
   const [archive, setArchive] = useState(JSON.parse(localStorage.getItem('archive')) || []); // New state for archived cards
   const [searchTerm, setSearchTerm] = useState('');
   const intervals = [5, 15, 32, 72, 160, 360, 792, 1700, 3840, 8440];
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(cards));
@@ -28,6 +30,36 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('archive', JSON.stringify(archive));
   }, [archive]);
+
+  useEffect(() => {
+    // Check if notifications API is supported
+    if (!('Notification' in window)) {
+      console.log('This browser does not support desktop notification');
+    } else if (Notification.permission === 'default') {
+      // The user hasn't granted or denied permission
+      setShowNotificationModal(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const now = new Date();
+    const updatedCards = cards.map(card => {
+      const nextTest = new Date(card.testStatus.nextTest);
+      if (nextTest < now) {
+        // If the next test time is in the past, set the card to the 'test pending' state
+        return {
+          ...card,
+          testStatus: {
+            ...card.testStatus,
+            testInProgress: true
+          }
+        };
+      }
+      return card;
+    });
+    setCards(updatedCards);
+    localStorage.setItem('cards', JSON.stringify(updatedCards));
+  }, [cards]);
 
   useEffect(() => {
     const timers = cards.map((card, index) => {
@@ -88,6 +120,23 @@ const App = () => {
 
   const deleteCard = (index) => {
     setCards(prevCards => prevCards.filter((c, i) => i !== index));
+  };
+
+  const handleConfirm = () => {
+    setShowNotificationModal(false);
+    Notification.requestPermission()
+      .then((permission) => {
+        // Handle the permission request outcome
+        if (permission === 'granted') {
+          console.log('Notification permission granted.');
+        } else {
+          console.log('Notification permission denied.');
+        }
+      });
+  };
+  
+  const handleCancel = () => {
+    setShowNotificationModal(false);
   };
 
   const handleTest = (content) => {
@@ -201,6 +250,13 @@ const App = () => {
         onClose={() => { setTestCardIndex(null); handleCancelTest(); }} // Call handleCancelTest when the modal is closed
         onTest={handleTest} 
         onCancel={handleCancelTest}
+      />
+    }
+    {showNotificationModal && 
+      <NotificationModal 
+        open={showNotificationModal} 
+        onConfirm={handleConfirm} 
+        onCancel={handleCancel}
       />
     }
     </div>

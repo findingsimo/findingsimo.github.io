@@ -13,7 +13,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
           <Toolbar style={{ maxWidth: 640, width: '100%', justifyContent: 'space-between' }}>
             {!isSearching && (
               <Typography variant="h6">
-                Spatium
+                Interval
               </Typography>
             )}
             {isSearching 

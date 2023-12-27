@@ -7,7 +7,7 @@ const ViewCardModal = ({ card, open, onClose }) => {
   return (
     <Dialog open={open} onClose={onClose} >
       <DialogTitle>{card.title}</DialogTitle>
-      <DialogContent sx={{ minWidth: '256px' }}>
+      <DialogContent sx={{ minWidth: '320px' }}>
         <Typography dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
       </DialogContent>
       <DialogActions>
