@@ -31,15 +31,15 @@ const App = () => {
     localStorage.setItem('archive', JSON.stringify(archive));
   }, [archive]);
 
-  useEffect(() => {
+ //  useEffect(() => {
     // Check if notifications API is supported
-    if (!('Notification' in window)) {
-      console.log('This browser does not support desktop notification');
-    } else if (Notification.permission === 'default') {
-      // The user hasn't granted or denied permission
-      setShowNotificationModal(true);
-    }
-  }, []);
+ //   if (!('Notification' in window)) {
+ //     console.log('This browser does not support desktop notification');
+ //   } else if (Notification.permission === 'default') {
+ //     // The user hasn't granted or denied permission
+ //     setShowNotificationModal(true);
+ //   }
+ // }, []);
 
   useEffect(() => {
     const now = new Date();
@@ -252,13 +252,13 @@ const App = () => {
         onCancel={handleCancelTest}
       />
     }
-    {showNotificationModal && 
-      <NotificationModal 
+  {/* {showNotificationModal && 
+     <NotificationModal 
         open={showNotificationModal} 
         onConfirm={handleConfirm} 
         onCancel={handleCancel}
       />
-    }
+   } */}
     </div>
     </ThemeProvider>
   );
