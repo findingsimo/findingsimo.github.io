@@ -18,7 +18,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
   }, [isSearching]);
 
   return (
-    <AppBar position="static" enableColorOnDark >
+    <AppBar position="static" enableColorOnDark color="primary" elevation={0}>
       <Box display="flex" justifyContent="center">
         <Toolbar style={{ maxWidth: 640, width: '100%', justifyContent: 'space-between' }}>
           {!isSearching && (
