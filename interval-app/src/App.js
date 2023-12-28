@@ -144,15 +144,23 @@ const App = () => {
       if (i !== testCardIndex) {
         return card;
       }
+  
+      const userWords = content.trim().toLowerCase().replace(/[.,]/g, "").split(/\s+/);
+      const cardWords = card.content.trim().toLowerCase().replace(/[.,]/g, "").split(/\s+/);
+  
+      const commonWords = userWords.filter(word => cardWords.includes(word));
+      const matchPercentage = commonWords.length / cardWords.length;
+  
       const nextTest = new Date();
-      if (content.trim() === card.content.trim()) { // Trim the content strings before comparing
+  
+      if (matchPercentage >= 0.75) {
         const newPassedTests = card.testStatus.passedTests + 1;
         if (newPassedTests < intervals.length) {
-          nextTest.setMinutes(nextTest.getMinutes() + intervals[newPassedTests]); // Set nextTest to the next interval from now
+          nextTest.setMinutes(nextTest.getMinutes() + intervals[newPassedTests]);
         }
-        if (newPassedTests === 10) { // If progress is 10/10
-          setArchive(prevArchive => [...prevArchive, { ...card, testStatus: { ...card.testStatus, passedTests: newPassedTests, nextTest, testInProgress: false } }]); // Add the card to archive
-          return null; // Remove the card from cards
+        if (newPassedTests === 10) {
+          setArchive(prevArchive => [...prevArchive, { ...card, testStatus: { ...card.testStatus, passedTests: newPassedTests, nextTest, testInProgress: false } }]);
+          return null;
         }
         return {
           ...card,
@@ -164,7 +172,8 @@ const App = () => {
           }
         };
       }
-      nextTest.setMinutes(nextTest.getMinutes() + intervals[card.testStatus.passedTests]); // Set nextTest to the current interval from now
+  
+      nextTest.setMinutes(nextTest.getMinutes() + intervals[card.testStatus.passedTests]);
       return {
         ...card,
         testStatus: {
@@ -173,7 +182,8 @@ const App = () => {
           testInProgress: false
         }
       };
-    }).filter(card => card !== null)); // Filter out the null values
+    }).filter(card => card !== null));
+  
     setTestCardIndex(null);
   };
 
