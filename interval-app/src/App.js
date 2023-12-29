@@ -41,25 +41,29 @@ const App = () => {
  //   }
  // }, []);
 
-  useEffect(() => {
-    const now = new Date();
-    const updatedCards = cards.map(card => {
-      const nextTest = new Date(card.testStatus.nextTest);
-      if (nextTest < now) {
-        // If the next test time is in the past, set the card to the 'test pending' state
-        return {
-          ...card,
-          testStatus: {
-            ...card.testStatus,
-            testInProgress: true
-          }
-        };
-      }
-      return card;
-    });
+ useEffect(() => {
+  const now = new Date();
+  const updatedCards = cards.map(card => {
+    const nextTest = new Date(card.testStatus.nextTest);
+    if (nextTest < now) {
+      // If the next test time is in the past, set the card to the 'test pending' state
+      return {
+        ...card,
+        testStatus: {
+          ...card.testStatus,
+          testInProgress: true
+        }
+      };
+    }
+    return card;
+  });
+
+  // Only update state if there is a change
+  if (JSON.stringify(updatedCards) !== JSON.stringify(cards)) {
     setCards(updatedCards);
     localStorage.setItem('cards', JSON.stringify(updatedCards));
-  }, [cards]);
+  }
+}, [cards]);
 
   useEffect(() => {
     const timers = cards.map((card, index) => {
@@ -216,7 +220,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
     <div style={{ minHeight: '100vh' }}>
-    <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+    <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} cards={cards} setCards={setCards} />
       <TabComponent 
         cards={cards} 
         archive={archive} 
