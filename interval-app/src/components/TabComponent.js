@@ -82,7 +82,7 @@ const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, 
         />
       </Tabs>
       {value === 0 && (
-        <Box p={3}>
+        <Box pt={3} pb={3} pl={2} pr={2}>
           {sortedCards.map((card) => {
             const index = filteredCards.indexOf(card);
             return (
@@ -99,7 +99,7 @@ const TabComponent = ({ cards, archive, onRetry, setViewCard, setEditCardIndex, 
         </Box>
       )}
       {value === 1 && (
-        <Box p={3}>
+        <Box pt={3} pb={3} pl={2} pr={2}>
           {filteredArchive.map((card, index) => (
             <Flashcard 
               key={index} 
