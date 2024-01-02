@@ -6,6 +6,7 @@ const FabComponent = (props) => {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [error, setError] = useState(false); 
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -15,6 +16,7 @@ const FabComponent = (props) => {
     setOpen(false);
     setTitle('');
     setContent('');
+    setError(false);  // Reset the error state
   };
 
   const handleSave = () => {
@@ -22,7 +24,7 @@ const FabComponent = (props) => {
       props.addCard(title, content);
       handleClose();
     } else {
-      alert('Both fields are required!');
+      setError(true);  // Set error to true when fields are empty
     }
   };
 
@@ -34,8 +36,8 @@ const FabComponent = (props) => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add New Card</DialogTitle>
         <DialogContent>
-          <TextField autoFocus margin="dense" id="title" label="Title" type="text" fullWidth required onChange={e => setTitle(e.target.value)} />
-          <TextField margin="dense" id="content" label="Content" type="text" fullWidth multiline rows={4} required onChange={e => setContent(e.target.value)} />
+          <TextField autoFocus margin="dense" id="title" label="Title" type="text" fullWidth required onChange={e => {setTitle(e.target.value); setError(false);}} error={error} />
+          <TextField margin="dense" id="content" label="Content" type="text" fullWidth multiline rows={4} required onChange={e => {setContent(e.target.value); setError(false);}} error={error} helperText={error && "Both fields are required!"} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

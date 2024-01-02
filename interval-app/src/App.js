@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import NotificationModal from './components/NotificationModal';
+import TestResultModal from './components/TestResultModal';
 
 const App = () => {
   const [cards, setCards] = useState(JSON.parse(localStorage.getItem('cards')) || []);
@@ -22,6 +23,8 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const intervals = [5, 15, 32, 72, 160, 360, 792, 1700, 3840, 8440];
   const [showNotificationModal, setShowNotificationModal] = useState(false);
+  const [showTestResultModal, setShowTestResultModal] = useState(false);
+  const [testResult, setTestResult] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(cards));
@@ -164,8 +167,12 @@ const App = () => {
         }
         if (newPassedTests === 10) {
           setArchive(prevArchive => [...prevArchive, { ...card, testStatus: { ...card.testStatus, passedTests: newPassedTests, nextTest, testInProgress: false } }]);
+          setShowTestResultModal(true);
+          setTestResult(true);
           return null;
         }
+        setShowTestResultModal(true);
+        setTestResult(true);
         return {
           ...card,
           testStatus: {
@@ -178,6 +185,8 @@ const App = () => {
       }
   
       nextTest.setMinutes(nextTest.getMinutes() + intervals[card.testStatus.passedTests]);
+      setShowTestResultModal(true);
+      setTestResult(false);
       return {
         ...card,
         testStatus: {
@@ -190,7 +199,6 @@ const App = () => {
   
     setTestCardIndex(null);
   };
-
   const handleCancelTest = () => {
     setCards(prevCards => prevCards.map((card, i) => {
       if (i !== testCardIndex) {
@@ -273,6 +281,13 @@ const App = () => {
         onCancel={handleCancel}
       />
    } */}
+    {showTestResultModal && 
+      <TestResultModal 
+        open={showTestResultModal} 
+        onClose={() => setShowTestResultModal(false)} 
+        result={testResult}
+      />
+    }
     </div>
     </ThemeProvider>
   );
