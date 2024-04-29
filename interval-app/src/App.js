@@ -228,7 +228,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
     <div style={{ minHeight: '100vh' }}>
-    <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} cards={cards} setCards={setCards} />
+    <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} cards={cards} setCards={setCards} archive={archive} setArchive={setArchive} />
       <TabComponent 
         cards={cards} 
         archive={archive} 

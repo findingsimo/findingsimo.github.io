@@ -28,7 +28,7 @@ const Header = ({ searchTerm, setSearchTerm, cards, setCards }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   const handleDownload = () => {
-    const data = JSON.stringify(cards);
+    const data = JSON.stringify({cards, archive});
     const blob = new Blob([data], {type: 'text/plain'});
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -44,9 +44,11 @@ const Header = ({ searchTerm, setSearchTerm, cards, setCards }) => {
   
       reader.onload = async (event) => {
         try {
-          const newCards = JSON.parse(event.target.result);
-          await setCards(newCards); // Update the cards state with the uploaded cards
-          localStorage.setItem('cards', JSON.stringify(newCards)); // Update the localStorage data
+          const {cards: newCards, archive: newArchive} = JSON.parse(event.target.result);
+          await setCards(newCards);
+          await setArchive(newArchive); // Update the archive state with the uploaded archived cards
+          localStorage.setItem('cards', JSON.stringify(newCards));
+          localStorage.setItem('archive', JSON.stringify(newArchive)); // Update the localStorage data for the archive
           alert('File uploaded successfully');
         } catch (error) {
           alert('Error reading file: ' + error.message);
