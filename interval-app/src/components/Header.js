@@ -44,11 +44,14 @@ const Header = ({ searchTerm, setSearchTerm, cards, setCards, archive, setArchiv
   
       reader.onload = async (event) => {
         try {
-          const {cards: newCards, archive: newArchive} = JSON.parse(event.target.result);
-          await setCards(newCards);
-          await setArchive(newArchive); // Update the archive state with the uploaded archived cards
-          localStorage.setItem('cards', JSON.stringify(newCards));
-          localStorage.setItem('archive', JSON.stringify(newArchive)); // Update the localStorage data for the archive
+          const data = JSON.parse(event.target.result);
+          if (!Array.isArray(data.cards) || !Array.isArray(data.archive)) {
+            throw new Error('Invalid data: cards and archive should be arrays');
+          }
+          await setCards(data.cards);
+          await setArchive(data.archive);
+          localStorage.setItem('cards', JSON.stringify(data.cards));
+          localStorage.setItem('archive', JSON.stringify(data.archive));
           alert('File uploaded successfully');
         } catch (error) {
           alert('Error reading file: ' + error.message);
