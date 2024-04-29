@@ -11,7 +11,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-const Header = ({ searchTerm, setSearchTerm, cards, setCards }) => {
+const Header = ({ searchTerm, setSearchTerm, cards, setCards, archive, setArchive }) => {
   const [isSearching, setIsSearching] = useState(false);
   const theme = useTheme();
 
