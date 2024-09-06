@@ -62,18 +62,24 @@
     <div class="footer">&#169; Phygrid 2024</div>
 
     <script>
-        function shareImage() {
-            if (navigator.canShare && navigator.canShare({ files: filesArray })) {
-                navigator.share({
-                    files: filesArray,
-                    title: 'Pictures',
-                    text: 'Our Pictures.',
-                })
-                .then(() => console.log('Share was successful.'))
-                .catch((error) => console.log('Sharing failed', error));
+        async function shareImage() {
+            try {
+                const response = await fetch('image.jpg');
+                const blob = await response.blob();
+                const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Image',
+                        text: 'Check out this cool image.',
+                    });
+                    console.log('Share was successful.');
                 } else {
-                console.log(`Your system doesn't support sharing files.`);
+                    console.log(`Your system doesn't support sharing files.`);
                 }
+            } catch (error) {
+                console.log('Sharing failed', error);
+            }
         }
     </script>
 </body>
