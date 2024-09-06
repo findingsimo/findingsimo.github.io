@@ -63,16 +63,17 @@
 
     <script>
         function shareImage() {
-            if (navigator.share) {
+            if (navigator.canShare && navigator.canShare({ files: filesArray })) {
                 navigator.share({
-                    title: 'Share Image',
-                    text: 'Check out this cool image.',
-                    url: document.getElementById('shareImg').src,
+                    files: filesArray,
+                    title: 'Pictures',
+                    text: 'Our Pictures.',
                 })
+                .then(() => console.log('Share was successful.'))
                 .catch((error) => console.log('Sharing failed', error));
-            } else {
+                } else {
                 console.log(`Your system doesn't support sharing files.`);
-            }
+                }
         }
     </script>
 </body>
