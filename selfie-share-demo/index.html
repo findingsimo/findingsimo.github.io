@@ -68,11 +68,18 @@
                 const blob = await response.blob();
                 const file = new File([blob], 'cover.jpg', { type: 'image/jpeg' });
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    await navigator.share({
-                        files: [file],
-                        title: 'Image',
-                        //text: 'Check out this cool image.',
-                    });
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+                    const shareData = {
+                        files: [file]
+                    };
+                    // passing on the title and text parameters in iOS breaks sharing as Instagram posts
+                    if (!isIOS) {
+                        shareData.title = 'Image';
+                        shareData.text = 'Check out this cool image.';
+                    }
+    
+                    await navigator.share(shareData);
                     console.log('Share was successful.');
                 } else {
                     console.log(`Your system doesn't support sharing files.`);
