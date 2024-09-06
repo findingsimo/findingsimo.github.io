@@ -64,19 +64,23 @@
     <script>
         async function shareImage() {
             try {
-                const response = await fetch('cover.jpg');
+                const response = await fetch('coer.jpg');
                 const blob = await response.blob();
-                const file = new File([blob], 'cover.jpg', { type: 'image/jpeg' });
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    await navigator.share({
-                        files: [file],
-                        title: 'Image',
-                        text: 'Check out this cool image.',
-                    });
-                    console.log('Share was successful.');
-                } else {
-                    console.log(`Your system doesn't support sharing files.`);
+                const reader = new FileReader();
+                reader.onloadend = async function() {
+                    const base64data = reader.result;
+                    if (navigator.canShare && navigator.canShare({ files: [new File([blob], 'cover.jpg', { type: 'image/jpeg' })] })) {
+                        await navigator.share({
+                            title: 'Image',
+                            text: 'Check out this cool image.',
+                            url: base64data,
+                        });
+                        console.log('Share was successful.');
+                    } else {
+                        console.log(`Your system doesn't support sharing files.`);
+                    }
                 }
+                reader.readAsDataURL(blob);
             } catch (error) {
                 console.log('Sharing failed', error);
             }
