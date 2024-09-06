@@ -70,8 +70,8 @@
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({
                         files: [file],
-                        title: 'Image',
-                        text: 'Check out this cool image.',
+                        //title: 'Image',
+                        //text: 'Check out this cool image.',
                     });
                     console.log('Share was successful.');
                 } else {
