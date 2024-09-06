@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selfie Share Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        .logo {
+            width: auto;
+            max-width: 300px;
+            height: 32px;
+
+        }
+        .image {
+            width: 100%;
+            max-width: 300px;
+        }
+        .footer {
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+        .share-btn {
+            margin: 20px 0;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .content-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <img class="logo" src="logo.svg" alt="Logo">
+    <div class="content-group">
+        <img class="image" id="shareImg" src="cover.jpg" alt="Image to share">
+        <p>Post your cover to social media and tag it with <strong>#selfie</strong>. We'll pick and share our favorites each week.</p>
+        <button class="share-btn" onclick="shareImage()">Share</button>
+    </div>
+    <div class="footer">&#169; Phygrid 2024</div>
+
+    <script>
+        function shareImage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Share Image',
+                    text: 'Check out this cool image.',
+                    url: document.getElementById('shareImg').src,
+                })
+                .catch((error) => console.log('Sharing failed', error));
+            } else {
+                console.log(`Your system doesn't support sharing files.`);
+            }
+        }
+    </script>
+</body>
+</html>
