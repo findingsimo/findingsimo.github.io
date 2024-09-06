@@ -73,7 +73,7 @@
                     const shareData = {
                         files: [file]
                     };
-                    // passing on the title and text parameters in iOS breaks sharing as Instagram posts
+                    // passing on the title and text parameters in iOS breaks sharing as Instagram posts, so we hide it there
                     if (!isIOS) {
                         shareData.title = 'Image';
                         shareData.text = 'Check out this cool image.';
