@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Service Company</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: white;
+            padding: 20px 0;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            width: 150px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .hero {
+            background-image: url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .tagline {
+            background-color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .about {
+            background-color: #f4f4f4;
+            padding: 60px 0;
+        }
+        .services {
+            padding: 60px 0;
+        }
+        .service-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .service-card {
+            flex-basis: calc(33.33% - 20px);
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .service-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        .secondary-hero {
+            background-image: url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        .quotes {
+            background-color: #f4f4f4;
+            padding: 60px 0;
+        }
+        .quote {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .contact {
+            padding: 60px 0;
+        }
+        .contact-info {
+            margin-bottom: 40px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .service-card {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="/api/placeholder/150/50" alt="Construction Company Logo" class="logo">
+            <a href="#contact" class="btn">Contact Us</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Building Your Future</h1>
+            <p>Quality construction services for residential and commercial projects</p>
+            <a href="#contact" class="btn">Reach Out Today</a>
+        </div>
+    </section>
+
+    <section class="tagline">
+        <div class="container">
+            <h2>Transforming Ideas into Solid Realities</h2>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <h2>About Our Company</h2>
+            <p>With over 20 years of experience, we've been delivering top-notch construction services to our community. Our team of skilled professionals is committed to bringing your vision to life, on time and within budget.</p>
+            <p>From residential renovations to large-scale commercial projects, we have the expertise to handle it all. Our focus on quality, safety, and customer satisfaction sets us apart in the industry.</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-cards">
+                <div class="service-card">
+                    <img src="/api/placeholder/80/80" alt="Residential Construction">
+                    <h3>Residential Construction</h3>
+                    <p>Custom homes and renovations tailored to your lifestyle</p>
+                </div>
+                <div class="service-card">
+                    <img src="/api/placeholder/80/80" alt="Commercial Construction">
+                    <h3>Commercial Construction</h3>
+                    <p>Office buildings, retail spaces, and industrial facilities</p>
+                </div>
+                <div class="service-card">
+                    <img src="/api/placeholder/80/80" alt="Infrastructure Projects">
+                    <h3>Infrastructure Projects</h3>
+                    <p>Roads, bridges, and public works for community development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secondary-hero">
+        <div class="container">
+            <h2>Building a Better Tomorrow, Today</h2>
+        </div>
+    </section>
+
+    <section class="quotes">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="quote">
+                <p>"Exceptional quality and professionalism. They completed our project on time and exceeded our expectations!"</p>
+                <p>- John D., Homeowner</p>
+            </div>
+            <div class="quote">
+                <p>"A reliable partner for our commercial developments. Their attention to detail is unmatched."</p>
+                <p>- Sarah L., Property Developer</p>
+            </div>
+            <div class="quote">
+                <p>"They transformed our outdated office into a modern, functional space. Highly recommended!"</p>
+                <p>- Michael R., Business Owner</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p>Address: 123 Construction Ave, Builder's Town, BT 12345</p>
+                <p>Phone: (555) 123-4567</p>
+                <p>Email: info@constructioncompany.com</p>
+                <p>Working Hours: Monday - Friday, 8:00 AM - 5:00 PM</p>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1570777656095!2d-73.98809108459377!3d40.758895179325856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1631214483822!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Construction Service Company. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
