@@ -369,12 +369,17 @@
             let currentIndex = 0;
             let startX;
             let endX;
+            let autoSlideInterval;
+            const autoSlideDelay = 5000; // 5 seconds
 
             // Create indicators
             slides.forEach((_, index) => {
                 const indicator = document.createElement('div');
                 indicator.classList.add('slider-indicator');
-                indicator.addEventListener('click', () => showSlide(index));
+                indicator.addEventListener('click', () => {
+                    showSlide(index);
+                    resetAutoSlideTimer();
+                });
                 indicatorsContainer.appendChild(indicator);
             });
 
@@ -396,8 +401,20 @@
                 showSlide((currentIndex - 1 + slides.length) % slides.length);
             }
 
-            nextBtn.addEventListener('click', nextSlide);
-            prevBtn.addEventListener('click', prevSlide);
+            function resetAutoSlideTimer() {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+            }
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlideTimer();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlideTimer();
+            });
 
             // Swipe functionality
             slider.addEventListener('touchstart', (e) => {
@@ -418,14 +435,15 @@
                     } else {
                         prevSlide();
                     }
+                    resetAutoSlideTimer();
                 }
             });
 
             // Initialize first slide
             showSlide(0);
 
-            // Auto-slide every 5 seconds
-            setInterval(nextSlide, 5000);
+            // Start auto-slide
+            resetAutoSlideTimer();
         });
     </script>
 </body>
