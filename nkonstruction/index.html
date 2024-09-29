@@ -360,7 +360,6 @@
     </footer>
 
     <script>
-        // JavaScript for the image slider
         document.addEventListener('DOMContentLoaded', function() {
             const slider = document.querySelector('.slider');
             const slides = document.querySelectorAll('.slide');
@@ -368,6 +367,8 @@
             const nextBtn = document.getElementById('nextBtn');
             const indicatorsContainer = document.querySelector('.slider-indicators');
             let currentIndex = 0;
+            let startX;
+            let endX;
 
             // Create indicators
             slides.forEach((_, index) => {
@@ -397,6 +398,28 @@
 
             nextBtn.addEventListener('click', nextSlide);
             prevBtn.addEventListener('click', prevSlide);
+
+            // Swipe functionality
+            slider.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            slider.addEventListener('touchmove', (e) => {
+                e.preventDefault(); // Prevent scrolling while swiping
+            });
+
+            slider.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                const diffX = startX - endX;
+
+                if (Math.abs(diffX) > 50) { // Minimum swipe distance
+                    if (diffX > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            });
 
             // Initialize first slide
             showSlide(0);
