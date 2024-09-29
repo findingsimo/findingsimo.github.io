@@ -361,90 +361,104 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const slider = document.querySelector('.slider');
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const indicatorsContainer = document.querySelector('.slider-indicators');
-            let currentIndex = 0;
-            let startX;
-            let endX;
-            let autoSlideInterval;
-            const autoSlideDelay = 5000; // 5 seconds
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicatorsContainer = document.querySelector('.slider-indicators');
+    let currentIndex = 0;
+    let startX, startY, endX, endY;
+    let autoSlideInterval;
+    const autoSlideDelay = 5000; // 5 seconds
 
-            // Create indicators
-            slides.forEach((_, index) => {
-                const indicator = document.createElement('div');
-                indicator.classList.add('slider-indicator');
-                indicator.addEventListener('click', () => {
-                    showSlide(index);
-                    resetAutoSlideTimer();
-                });
-                indicatorsContainer.appendChild(indicator);
-            });
-
-            const indicators = document.querySelectorAll('.slider-indicator');
-
-            function showSlide(index) {
-                slider.style.transform = `translateX(-${index * 100}%)`;
-                indicators.forEach((ind, i) => {
-                    ind.classList.toggle('active', i === index);
-                });
-                currentIndex = index;
-            }
-
-            function nextSlide() {
-                showSlide((currentIndex + 1) % slides.length);
-            }
-
-            function prevSlide() {
-                showSlide((currentIndex - 1 + slides.length) % slides.length);
-            }
-
-            function resetAutoSlideTimer() {
-                clearInterval(autoSlideInterval);
-                autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
-            }
-
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                resetAutoSlideTimer();
-            });
-
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                resetAutoSlideTimer();
-            });
-
-            // Swipe functionality
-            slider.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-            });
-
-            slider.addEventListener('touchmove', (e) => {
-                e.preventDefault(); // Prevent scrolling while swiping
-            });
-
-            slider.addEventListener('touchend', (e) => {
-                endX = e.changedTouches[0].clientX;
-                const diffX = startX - endX;
-
-                if (Math.abs(diffX) > 50) { // Minimum swipe distance
-                    if (diffX > 0) {
-                        nextSlide();
-                    } else {
-                        prevSlide();
-                    }
-                    resetAutoSlideTimer();
-                }
-            });
-
-            // Initialize first slide
-            showSlide(0);
-
-            // Start auto-slide
+    // Create indicators
+    slides.forEach((_, index) => {
+        const indicator = document.createElement('div');
+        indicator.classList.add('slider-indicator');
+        indicator.addEventListener('click', () => {
+            showSlide(index);
             resetAutoSlideTimer();
         });
+        indicatorsContainer.appendChild(indicator);
+    });
+
+    const indicators = document.querySelectorAll('.slider-indicator');
+
+    function showSlide(index) {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        indicators.forEach((ind, i) => {
+            ind.classList.toggle('active', i === index);
+        });
+        currentIndex = index;
+    }
+
+    function nextSlide() {
+        showSlide((currentIndex + 1) % slides.length);
+    }
+
+    function prevSlide() {
+        showSlide((currentIndex - 1 + slides.length) % slides.length);
+    }
+
+    function resetAutoSlideTimer() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+    }
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoSlideTimer();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoSlideTimer();
+    });
+
+    // Updated touch event handling
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+
+    slider.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) {
+            return; // Ignore multi-touch gestures
+        }
+        endX = e.touches[0].clientX;
+        endY = e.touches[0].clientY;
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+
+        // Check if the swipe is more horizontal than vertical
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            e.preventDefault(); // Prevent scrolling only for horizontal swipes
+        }
+    });
+
+    slider.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        endY = e.changedTouches[0].clientY;
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+
+        // Check if the swipe is more horizontal than vertical and meets minimum distance
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            resetAutoSlideTimer();
+        }
+    });
+
+    // Initialize first slide
+    showSlide(0);
+
+    // Start auto-slide
+    resetAutoSlideTimer();
+});
     </script>
 </body>
 </html>
