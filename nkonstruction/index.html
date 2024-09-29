@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Construction Service Company</title>
+    <title>NKonstruction Home Improvements</title>
+    <link rel="icon" type="image/x-png" href="favicon.png">
     <style>
         * {
             box-sizing: border-box;
@@ -29,18 +30,27 @@
             align-items: center;
         }
         .logo {
-            width: 150px;
+            width: 256px;
+        }
+        a {
+            color: #bf994b;
+        }
+        a:hover {
+            color: #a1813e;
         }
         .btn {
             display: inline-block;
-            background-color: #ff6600;
+            background-color: #bf994b;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
         }
+        .btn:hover {
+            background-color: #a1813e;
+        }
         .hero {
-            background-image: url('/api/placeholder/1200/600');
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.67)), url('img/hero.jpg');
             background-size: cover;
             background-position: center;
             color: white;
@@ -51,13 +61,26 @@
             font-size: 48px;
             margin-bottom: 20px;
         }
+        .hero h2 {
+            font-size: 32px;
+            margin: 28px 0 0;
+        }
+        .hero-tagline {
+            margin-bottom: 32px;
+        }
         .tagline {
             background-color: white;
             text-align: center;
             padding: 40px 0;
         }
+        .tagline h2 {
+            margin-bottom: 0;
+        }
+        h2 {
+            margin-bottom: 24px;
+        }
         .about {
-            background-color: #f4f4f4;
+            background-color: #f7f1e5;
             padding: 60px 0;
         }
         .services {
@@ -82,15 +105,14 @@
             margin-bottom: 20px;
         }
         .secondary-hero {
-            background-image: url('/api/placeholder/1200/400');
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.67)), url('img/hero2.jpg');
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
-            padding: 100px 0;
+            padding: 192px 0;
         }
         .quotes {
-            background-color: #f4f4f4;
             padding: 60px 0;
         }
         .quote {
@@ -98,6 +120,95 @@
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .before-after-slider {
+            background-color: #f7f1e5;
+            padding-top: 60px;
+        }
+        .slider-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            padding-bottom: 60px;
+        }
+        .slide {
+            flex: 0 0 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .before-after-image {
+            width: 48%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .before-after-image::before {
+            content: attr(data-label);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        .slider-nav {
+            position: absolute;
+            top: calc(50% - 30px);
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        .slider-nav button {
+            background-color: rgba(191, 153, 75, 0.7);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+        .slider-nav button:hover {
+            background-color: rgba(161, 129, 62, 0.9);
+        }
+        .slider-indicators {
+            position: absolute;
+            bottom: 28px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .slider-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(191, 153, 75, 0.2);
+            cursor: pointer;
+        }
+        .slider-indicator.active {
+            background-color: #bf994b;
+        }
+        @media (max-width: 768px) {
+            .slide {
+                flex-direction: column;
+            }
+            .before-after-image {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
         .contact {
             padding: 60px 0;
@@ -121,7 +232,7 @@
 <body>
     <header>
         <div class="container header-content">
-            <img src="/api/placeholder/150/50" alt="Construction Company Logo" class="logo">
+            <img src="img/nkonstruction_logo_dark_slogan_horizontal.png" alt="NKonstruction Home Improvements Logo" class="logo">
             <a href="#contact" class="btn">Contact Us</a>
         </div>
     </header>
@@ -129,8 +240,9 @@
     <section class="hero">
         <div class="container">
             <h1>Building Your Future</h1>
-            <p>Quality construction services for residential and commercial projects</p>
+            <p class="hero-tagline">Quality construction services for residential and commercial projects</p>
             <a href="#contact" class="btn">Reach Out Today</a>
+            <h2>Call <a href="tel:5555555555">(555) 123-4567</a></h2>
         </div>
     </section>
 
@@ -195,6 +307,33 @@
         </div>
     </section>
 
+    <section class="before-after-slider">
+        <div class="container">
+            <h2>Our Transformations</h2>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide">
+                        <div class="before-after-image" style="background-image: url('img/before1.jpg');" data-label="Before"></div>
+                        <div class="before-after-image" style="background-image: url('img/after1.jpg');" data-label="After"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="before-after-image" style="background-image: url('img/before2.jpg');" data-label="Before"></div>
+                        <div class="before-after-image" style="background-image: url('img/after2.jpg');" data-label="After"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="before-after-image" style="background-image: url('img/before3.jpg');" data-label="Before"></div>
+                        <div class="before-after-image" style="background-image: url('img/after3.jpg');" data-label="After"></div>
+                    </div>
+                </div>
+                <div class="slider-nav">
+                    <button id="prevBtn">&#8592;</button>
+                    <button id="nextBtn">&#8594;</button>
+                </div>
+                <div class="slider-indicators"></div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="contact">
         <div class="container">
             <h2>Contact Us</h2>
@@ -210,8 +349,56 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Construction Service Company. All rights reserved.</p>
+            <p>&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script>
+                NKonstruction. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // JavaScript for the image slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const indicatorsContainer = document.querySelector('.slider-indicators');
+            let currentIndex = 0;
+
+            // Create indicators
+            slides.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.classList.add('slider-indicator');
+                indicator.addEventListener('click', () => showSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            const indicators = document.querySelectorAll('.slider-indicator');
+
+            function showSlide(index) {
+                slider.style.transform = `translateX(-${index * 100}%)`;
+                indicators.forEach((ind, i) => {
+                    ind.classList.toggle('active', i === index);
+                });
+                currentIndex = index;
+            }
+
+            function nextSlide() {
+                showSlide((currentIndex + 1) % slides.length);
+            }
+
+            function prevSlide() {
+                showSlide((currentIndex - 1 + slides.length) % slides.length);
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            // Initialize first slide
+            showSlide(0);
+
+            // Auto-slide every 5 seconds
+            setInterval(nextSlide, 5000);
+        });
+    </script>
 </body>
 </html>
