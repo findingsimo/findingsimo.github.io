@@ -106,8 +106,6 @@
 
   <script>
     // Updated placeholder dimensions to match new icon size
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
     const iconSets = [
       {
         background: 'background.png',
@@ -183,84 +181,64 @@
       }
     ];
 
-const grid = document.getElementById('iconGrid');
-
-iconSets.forEach((iconSet, index) => {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'icon-wrapper';
-
-  const icon = document.createElement('div');
-  icon.className = 'icon';
-
-  const background = document.createElement('div');
-  background.className = 'layer background';
-  background.style.backgroundImage = `url('${iconSet.background}')`;
-
-  const middle = document.createElement('div');
-  middle.className = 'layer middle';
-  middle.style.backgroundImage = `url('${iconSet.middle}')`;
-
-  const foreground = document.createElement('div');
-  foreground.className = 'layer foreground';
-  foreground.style.backgroundImage = `url('${iconSet.foreground}')`;
-
-  const caption = document.createElement('div');
-  caption.className = 'caption';
-  caption.textContent = iconSet.caption;
-
-  icon.appendChild(background);
-  icon.appendChild(middle);
-  icon.appendChild(foreground);
-
-  wrapper.appendChild(icon);
-  wrapper.appendChild(caption);
-
-  if (isMobile) {
-    icon.addEventListener('devicemotion', (event) => {
-      const { beta, gamma } = event.rotationRate;
-      const maxTilt = 15;
-
-      const xTiltPercent = gamma / maxTilt;
-      const yTiltPercent = beta / maxTilt;
-
-      middle.style.transform = `
-        translateX(${xTiltPercent * 50}px)
-        translateY(${yTiltPercent * 50}px)
-      `;
-
-      foreground.style.transform = `
-        translateX(${-xTiltPercent * 100}px)
-        translateY(${-yTiltPercent * 100}px)
-      `;
+    const grid = document.getElementById('iconGrid');
+    
+    iconSets.forEach((iconSet, index) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'icon-wrapper';
+      
+      const icon = document.createElement('div');
+      icon.className = 'icon';
+      
+      const background = document.createElement('div');
+      background.className = 'layer background';
+      background.style.backgroundImage = `url('${iconSet.background}')`;
+      
+      const middle = document.createElement('div');
+      middle.className = 'layer middle';
+      middle.style.backgroundImage = `url('${iconSet.middle}')`;
+      
+      const foreground = document.createElement('div');
+      foreground.className = 'layer foreground';
+      foreground.style.backgroundImage = `url('${iconSet.foreground}')`;
+      
+      const caption = document.createElement('div');
+      caption.className = 'caption';
+      caption.textContent = iconSet.caption;
+      
+      icon.appendChild(background);
+      icon.appendChild(middle);
+      icon.appendChild(foreground);
+      
+      wrapper.appendChild(icon);
+      wrapper.appendChild(caption);
+      
+      icon.addEventListener('mousemove', (e) => {
+        const rect = icon.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const xPercent = (x / rect.width - 0.5) * 2;
+        const yPercent = (y / rect.height - 0.5) * 2;
+        
+        middle.style.transform = `
+          translateX(${xPercent * 1.5}px)
+          translateY(${yPercent * 1.5}px)
+        `;
+        
+        foreground.style.transform = `
+          translateX(${-xPercent * 3}px)
+          translateY(${-yPercent * 3}px)
+        `;
+      });
+      
+      icon.addEventListener('mouseleave', () => {
+        middle.style.transform = 'none';
+        foreground.style.transform = 'none';
+      });
+      
+      grid.appendChild(wrapper);
     });
-  } else {
-    icon.addEventListener('mousemove', (e) => {
-      const rect = icon.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const xPercent = (x / rect.width - 0.5) * 2;
-      const yPercent = (y / rect.height - 0.5) * 2;
-
-      middle.style.transform = `
-        translateX(${xPercent * 1.5}px)
-        translateY(${yPercent * 1.5}px)
-      `;
-
-      foreground.style.transform = `
-        translateX(${-xPercent * 3}px)
-        translateY(${-yPercent * 3}px)
-      `;
-    });
-
-    icon.addEventListener('mouseleave', () => {
-      middle.style.transform = 'none';
-      foreground.style.transform = 'none';
-    });
-  }
-
-  grid.appendChild(wrapper);
-});
   </script>
 </body>
 </html>
