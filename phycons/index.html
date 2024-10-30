@@ -212,6 +212,27 @@
       
       wrapper.appendChild(icon);
       wrapper.appendChild(caption);
+
+      if (isMobile) {
+    icon.addEventListener('devicemotion', (event) => {
+      const { beta, gamma } = event.rotationRate;
+      const maxTilt = 15; // Maximum tilt angle in degrees
+
+      // Calculate the tilt percentages
+      const xTiltPercent = gamma / maxTilt;
+      const yTiltPercent = beta / maxTilt;
+
+      middle.style.transform = `
+        translateX(${xTiltPercent * 50}px)
+        translateY(${yTiltPercent * 50}px)
+      `;
+
+      foreground.style.transform = `
+        translateX(${-xTiltPercent * 100}px)
+        translateY(${-yTiltPercent * 100}px)
+      `;
+    });
+  } else {
       
       icon.addEventListener('mousemove', (e) => {
         const rect = icon.getBoundingClientRect();
@@ -231,6 +252,8 @@
           translateY(${-yPercent * 3}px)
         `;
       });
+
+  }
       
       icon.addEventListener('mouseleave', () => {
         middle.style.transform = 'none';
