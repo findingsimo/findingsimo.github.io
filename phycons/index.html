@@ -108,15 +108,80 @@
     // Updated placeholder dimensions to match new icon size
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-const iconSets = [
-  {
-    background: 'background.png',
-    middle: 'signage_md.png',
-    foreground: '',
-    caption: 'Playlist Signage'
-  },
-  // ... (other icon sets)
-];
+    const iconSets = [
+      {
+        background: 'background.png',
+        middle: 'signage_md.png',
+        foreground: '',
+        caption: 'Playlist Signage'
+      },
+      {
+        background: 'background.png',
+        middle: 'ea_md.png',
+        foreground: '',
+        caption: 'Endless Aisle'
+      },
+      {
+        background: 'background.png',
+        middle: 'queue_kiosk_md.png',
+        foreground: 'queue_kiosk_fg.png',
+        caption: 'Queue Kiosk'
+      },
+      {
+        background: 'background.png',
+        middle: 'omnivisit_md.png',
+        foreground: 'omnivisit_fg.png', 
+        caption: 'OmniVisit'
+      },
+      {
+        background: 'background.png',
+        middle: 'queue_mgmt_md.png',
+        foreground: 'queue_mgmt_fg.png',
+        caption: 'Queue Management'
+      },
+      {
+        background: 'background.png',
+        middle: 'oc_md.png',
+        foreground: 'oc_fg.png',
+        caption: 'Occupancy Control'
+      },
+      {
+        background: 'background.png',
+        middle: 'ab_md.png',
+        foreground: 'ab_fg.png',
+        caption: 'People Counter'
+      },
+      {
+        background: 'background.png',
+        middle: 'op_md.png',
+        foreground: 'op_fg.png',
+        caption: 'Order Pickup'
+      },
+      {
+        background: 'background.png',
+        middle: 'tasks_md.png',
+        foreground: 'tasks_fg.png',
+        caption: 'Tasks'
+      },
+      {
+        background: 'background.png',
+        middle: 'pat_md.png',
+        foreground: '/api/placeholder/128/128?text=6fg',
+        caption: 'AI Assistant'
+      },
+      {
+        background: 'background.png',
+        middle: 'sco_md.png',
+        foreground: 'sco_fg.png',
+        caption: 'Self Checkout'
+      },
+      {
+        background: 'background.png',
+        middle: 'fys_md.png',
+        foreground: 'fys_fg.png',
+        caption: 'Find Your Style'
+      }
+    ];
 
 const grid = document.getElementById('iconGrid');
 
