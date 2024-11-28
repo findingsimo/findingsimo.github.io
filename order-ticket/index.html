@@ -127,7 +127,7 @@ const qrImage = document.getElementById('qr-code');
 const createTicketBtn = document.getElementById('create-ticket-btn');
 const iframeContainer = document.getElementById('iframe-container');
 const qrContainer = document.getElementById('qr-container');
-const baseUrl = "https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5/positions/57c8892c-4fa5-4457-a4ca-1a5117722859";
+const baseUrl = "https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5";
 
 function updateQRCode(url) {
     qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
