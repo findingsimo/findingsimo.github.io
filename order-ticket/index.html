@@ -45,6 +45,7 @@ h1 {
     max-width: 400px;
     margin: 0 auto;
     width: 100%;
+    display: none; /* Hidden by default */
 }
 .qr-display {
     height: 160px;
@@ -60,6 +61,7 @@ h1 {
     max-width: 400px;
     margin: 0 auto;
     width: 100%;
+    display: none; /* Hidden by default */
 }
 iframe {
     width: 100%;
@@ -106,13 +108,13 @@ iframe {
         <button class="create-ticket-btn" id="create-ticket-btn">Create new ticket</button>
     </div>
     <div class="content">
-        <div class="iframe-section panel">
+        <div class="iframe-section panel" id="iframe-container">
             <iframe
                 id="content-frame"
                 title="Embedded Content">
             </iframe>
         </div>
-        <div class="qr-section panel">
+        <div class="qr-section panel" id="qr-container">
             <div class="qr-display">
                 <img id="qr-code" alt="QR Code" />
             </div>
@@ -123,14 +125,23 @@ iframe {
 const iframe = document.getElementById('content-frame');
 const qrImage = document.getElementById('qr-code');
 const createTicketBtn = document.getElementById('create-ticket-btn');
-const iframeUrl = "https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5/positions/57c8892c-4fa5-4457-a4ca-1a5117722859";
+const iframeContainer = document.getElementById('iframe-container');
+const qrContainer = document.getElementById('qr-container');
+const baseUrl = "https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5/positions/57c8892c-4fa5-4457-a4ca-1a5117722859";
 
 function updateQRCode(url) {
     qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
 }
 
 function loadIframe() {
-    iframe.src = iframeUrl;
+    // Add timestamp to URL to bust cache
+    const timestamp = new Date().getTime();
+    const cacheBustedUrl = `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}_t=${timestamp}`;
+    iframe.src = cacheBustedUrl;
+    
+    // Show both containers
+    iframeContainer.style.display = 'block';
+    qrContainer.style.display = 'block';
 }
 
 createTicketBtn.addEventListener('click', () => {
@@ -144,8 +155,10 @@ createTicketBtn.addEventListener('click', () => {
 
 setInterval(() => {
     try {
-        const currentUrl = iframe.contentWindow.location.href;
-        updateQRCode(currentUrl);
+        if (iframe.src) {
+            const currentUrl = iframe.contentWindow.location.href;
+            updateQRCode(currentUrl);
+        }
     } catch (error) {
         // Handle cross-origin restrictions silently
     }
@@ -153,8 +166,10 @@ setInterval(() => {
 
 iframe.addEventListener('load', () => {
     try {
-        const currentUrl = iframe.contentWindow.location.href;
-        updateQRCode(currentUrl);
+        if (iframe.src) {
+            const currentUrl = iframe.contentWindow.location.href;
+            updateQRCode(currentUrl);
+        }
     } catch (error) {
         // Handle cross-origin restrictions silently
     }
