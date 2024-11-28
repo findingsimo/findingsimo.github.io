@@ -54,22 +54,16 @@
             width: 100%;
         }
 
-        .qr-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            color: #4b5563;
-        }
-
         .qr-display {
-            background: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.375rem;
             height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .qr-display img {
+            height: 140px;  /* Slightly larger QR code */
+            width: 140px;
         }
 
         .iframe-section {
@@ -80,7 +74,7 @@
 
         iframe {
             width: 100%;
-            height: 700px;  /* Increased by 100px from 600px */
+            height: 700px;
             border: none;
         }
 
@@ -90,7 +84,12 @@
             }
 
             .qr-display {
-                height: 500px;  /* Increased by 100px from 400px */
+                height: 500px;
+            }
+
+            .qr-display img {
+                height: 200px;  /* Even larger on desktop */
+                width: 200px;
             }
         }
     </style>
@@ -111,12 +110,6 @@
             </div>
 
             <div class="qr-section panel">
-                <div class="qr-header">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M3 7V5h2V3h14v2h2v2h-2v14h-2v2H3v-2H1V7h2Zm2 0h12V5H5v2Zm12 2H5v10h12V9Z"/>
-                    </svg>
-                    <h2>QR Code</h2>
-                </div>
                 <div class="qr-display">
                     <img id="qr-code" alt="QR Code" />
                 </div>
@@ -128,15 +121,12 @@
         const iframe = document.getElementById('content-frame');
         const qrImage = document.getElementById('qr-code');
 
-        // Function to update QR code
         function updateQRCode(url) {
-            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
+            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
         }
 
-        // Initial QR code generation
         updateQRCode(iframe.src);
 
-        // Set up a periodic check for URL changes
         setInterval(() => {
             try {
                 const currentUrl = iframe.contentWindow.location.href;
@@ -146,7 +136,6 @@
             }
         }, 1000);
 
-        // Also update when iframe loads
         iframe.addEventListener('load', () => {
             try {
                 const currentUrl = iframe.contentWindow.location.href;
