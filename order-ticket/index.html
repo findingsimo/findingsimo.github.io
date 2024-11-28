@@ -72,13 +72,6 @@
             justify-content: center;
         }
 
-        .url-display {
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            color: #4b5563;
-            word-break: break-all;
-        }
-
         .iframe-section {
             max-width: 400px;
             margin: 0 auto;
@@ -87,7 +80,7 @@
 
         iframe {
             width: 100%;
-            height: 600px;
+            height: 700px; /* Increased by 100px from 600px */
             border: none;
         }
 
@@ -97,7 +90,7 @@
             }
 
             .qr-display {
-                height: 400px;
+                height: 500px; /* Increased by 100px from 400px */
             }
         }
     </style>
@@ -111,9 +104,9 @@
         <div class="content">
             <div class="iframe-section panel">
                 <iframe 
+                    id="content-frame"
                     src="https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5" 
-                    title="Embedded Content"
-                    onload="updateQRCode(this)">
+                    title="Embedded Content">
                 </iframe>
             </div>
 
@@ -127,32 +120,41 @@
                 <div class="qr-display">
                     <img id="qr-code" alt="QR Code" />
                 </div>
-                <div id="current-url" class="url-display"></div>
             </div>
         </div>
     </main>
 
     <script>
-        let currentUrl = 'https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5';
+        const iframe = document.getElementById('content-frame');
         const qrImage = document.getElementById('qr-code');
-        const urlDisplay = document.getElementById('current-url');
 
-        function updateQRCode(iframe) {
+        // Function to update QR code
+        function updateQRCode(url) {
+            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
+        }
+
+        // Set initial QR code
+        updateQRCode(iframe.src);
+
+        // Listen for iframe load events
+        iframe.addEventListener('load', function() {
             try {
-                const newUrl = iframe.contentWindow.location.href;
-                if (newUrl !== currentUrl) {
-                    currentUrl = newUrl;
-                    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}`;
-                    urlDisplay.textContent = currentUrl;
-                }
+                const newUrl = this.contentWindow.location.href;
+                updateQRCode(newUrl);
             } catch (error) {
                 console.warn('Unable to access iframe URL due to same-origin policy');
             }
-        }
+        });
 
-        // Initial QR code generation
-        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}`;
-        urlDisplay.textContent = currentUrl;
+        // Optional: Poll for URL changes to catch navigation within the iframe
+        setInterval(() => {
+            try {
+                const currentUrl = iframe.contentWindow.location.href;
+                updateQRCode(currentUrl);
+            } catch (error) {
+                // Silently handle cross-origin errors
+            }
+        }, 1000);
     </script>
 </body>
 </html>
