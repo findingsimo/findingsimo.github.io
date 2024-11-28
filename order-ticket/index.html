@@ -136,7 +136,7 @@ const qrImage = document.getElementById('qr-code');
 const createTicketBtn = document.getElementById('create-ticket-btn');
 const iframeContainer = document.getElementById('iframe-container');
 const qrContainer = document.getElementById('qr-container');
-const baseUrl = "https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5/";
+const baseUrl = "https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5/ticket";
 
 // Add no-cache headers to the iframe
 function setNoCacheHeaders() {
@@ -153,7 +153,7 @@ function updateQRCode(url) {
 function generateUniqueUrl() {
     const timestamp = new Date().getTime();
     const random = Math.random().toString(36).substring(7);
-    return `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}_t=${timestamp}&_r=${random}`;
+    return `${baseUrl}?_t=${timestamp}&_r=${random}`;  // Always start from baseUrl
 }
 
 function loadIframe() {
