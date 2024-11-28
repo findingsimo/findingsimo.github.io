@@ -80,7 +80,7 @@
 
         iframe {
             width: 100%;
-            height: 700px; /* Increased by 100px from 600px */
+            height: 700px;  /* Increased by 100px from 600px */
             border: none;
         }
 
@@ -90,7 +90,7 @@
             }
 
             .qr-display {
-                height: 500px; /* Increased by 100px from 400px */
+                height: 500px;  /* Increased by 100px from 400px */
             }
         }
     </style>
@@ -133,28 +133,28 @@
             qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}`;
         }
 
-        // Set initial QR code
+        // Initial QR code generation
         updateQRCode(iframe.src);
 
-        // Listen for iframe load events
-        iframe.addEventListener('load', function() {
-            try {
-                const newUrl = this.contentWindow.location.href;
-                updateQRCode(newUrl);
-            } catch (error) {
-                console.warn('Unable to access iframe URL due to same-origin policy');
-            }
-        });
-
-        // Optional: Poll for URL changes to catch navigation within the iframe
+        // Set up a periodic check for URL changes
         setInterval(() => {
             try {
                 const currentUrl = iframe.contentWindow.location.href;
                 updateQRCode(currentUrl);
             } catch (error) {
-                // Silently handle cross-origin errors
+                // Handle cross-origin restrictions silently
             }
         }, 1000);
+
+        // Also update when iframe loads
+        iframe.addEventListener('load', () => {
+            try {
+                const currentUrl = iframe.contentWindow.location.href;
+                updateQRCode(currentUrl);
+            } catch (error) {
+                // Handle cross-origin restrictions silently
+            }
+        });
     </script>
 </body>
 </html>
