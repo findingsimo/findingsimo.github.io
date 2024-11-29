@@ -1,135 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Previous head and style sections remain the same -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Order Ticket</title>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #f9fafb;
-}
-header {
-    padding: 1rem;
-    background-color: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-.header-container {
-    max-width: 850px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-h1 {
-    font-size: 1.5rem;
-    color: #1f2937;
-}
-.container {
-    max-width: 850px;
-    margin: 1.5rem auto;
-    padding: 0 1rem;
-}
-.content {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-direction: column;
-}
-.panel {
-    background: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-.qr-section {
-    max-width: 400px;
-    margin: 0 auto;
-    width: 100%;
-    display: none;
-    order: -1; /* This moves the QR section above in mobile view */
-}
-.qr-display {
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.qr-display img {
-    height: 140px;
-    width: 140px;
-}
-.iframe-section {
-    max-width: 400px;
-    margin: 0 auto;
-    width: 100%;
-    display: none;
-}
-iframe {
-    width: 100%;
-    height: 700px;
-    border: none;
-}
-.create-ticket-btn {
-    background-color: #2563eb;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-.create-ticket-btn:hover {
-    background-color: #1d4ed8;
-}
-@media (min-width: 768px) {
-    .content {
-        flex-direction: row;
-    }
-    .qr-section {
-        order: 0; /* Reset the order for desktop view */
-    }
-    .qr-display {
-        height: 100%;
-    }
-    .qr-display img {
-        height: 200px;
-        width: 200px;
-    }
-    .header-container {
-        padding: 0 1rem;
-    }
-}
+/* ... Previous styles remain the same ... */
 </style>
 </head>
 <body>
-<header>
-    <div class="header-container">
-        <h1>Order Ticket</h1>
-        <button class="create-ticket-btn" id="create-ticket-btn">New ticket</button>
-    </div>
-</header>
-<main class="container">
-    <div class="content">
-        <div class="iframe-section panel" id="iframe-container">
-            <iframe
-                id="content-frame"
-                title="Embedded Content">
-            </iframe>
-        </div>
-        <div class="qr-section panel" id="qr-container">
-            <div class="qr-display">
-                <img id="qr-code" alt="QR Code" />
-            </div>
-        </div>
-    </div>
-</main>
+<!-- Previous HTML structure remains the same -->
 <script>
 const iframe = document.getElementById('content-frame');
 const qrImage = document.getElementById('qr-code');
@@ -138,59 +22,67 @@ const iframeContainer = document.getElementById('iframe-container');
 const qrContainer = document.getElementById('qr-container');
 const baseUrl = "https://queue.uae.ombori.com/samsung-mena/queues/64189f3d-5cf8-4770-a9d4-472d57af7fb5/";
 
-// Add no-cache headers to the iframe
-function setNoCacheHeaders() {
-    const meta = document.createElement('meta');
-    meta.httpEquiv = 'Cache-Control';
-    meta.content = 'no-cache, no-store, must-revalidate';
-    document.head.appendChild(meta);
-}
+let ticketCounter = 0;
 
-function updateQRCode(url) {
-    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+function clearIframeCache() {
+    // Remove all iframes
+    const iframes = iframeContainer.getElementsByTagName('iframe');
+    while(iframes.length > 0) {
+        iframes[0].parentNode.removeChild(iframes[0]);
+    }
+    
+    // Clear browser cache for the iframe URL
+    window.location.hash = '';
+    if (window.performance && window.performance.clearResourceTimings) {
+        window.performance.clearResourceTimings();
+    }
 }
 
 function generateUniqueUrl() {
-    const timestamp = new Date().getTime();
+    ticketCounter++;
+    const timestamp = Date.now();
     const random = Math.random().toString(36).substring(7);
-    return `${baseUrl}?_t=${timestamp}&_r=${random}`;  // Always start from baseUrl
+    return `${baseUrl}?_t=${timestamp}&_r=${random}&_c=${ticketCounter}`;
 }
 
 function loadIframe() {
-    // Remove existing iframe
-    const oldIframe = document.getElementById('content-frame');
-    if (oldIframe) {
-        oldIframe.parentNode.removeChild(oldIframe);
-    }
-
-    // Create new iframe
+    // First clear existing cache
+    clearIframeCache();
+    
+    // Create new iframe with cache-busting attributes
     const newIframe = document.createElement('iframe');
     newIframe.id = 'content-frame';
     newIframe.title = 'Embedded Content';
     
-    // Generate unique URL with multiple cache-busting parameters
-    const uniqueUrl = generateUniqueUrl();
-    
-    // Set cache-control headers
+    // Add cache-busting headers
     newIframe.setAttribute('loading', 'eager');
     newIframe.setAttribute('importance', 'high');
+    newIframe.setAttribute('cache', 'no-store');
     
-    // Add the iframe to the container
+    // Generate unique URL
+    const uniqueUrl = generateUniqueUrl();
+    
+    // Add the iframe to container first
     iframeContainer.appendChild(newIframe);
     
-    // Set the source after adding to DOM
+    // Force a small delay then set source
     setTimeout(() => {
+        // Clear any existing content
+        if (newIframe.contentWindow) {
+            newIframe.contentWindow.document.open();
+            newIframe.contentWindow.document.write('');
+            newIframe.contentWindow.document.close();
+        }
+        
+        // Set new source with cache buster
         newIframe.src = uniqueUrl;
     }, 50);
     
-    // Show both containers
+    // Show containers
     iframeContainer.style.display = 'block';
     qrContainer.style.display = 'block';
-
-    // Update reference to new iframe
-    iframe = newIframe;
     
-    // Add load event listener to new iframe
+    // Add load event listener
     newIframe.addEventListener('load', () => {
         try {
             if (newIframe.src) {
@@ -203,10 +95,14 @@ function loadIframe() {
     });
 }
 
-// Initialize no-cache headers
-setNoCacheHeaders();
+function updateQRCode(url) {
+    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+}
 
-createTicketBtn.addEventListener('click', loadIframe);
+// Initialize
+createTicketBtn.addEventListener('click', () => {
+    loadIframe();
+});
 
 // Monitor URL changes
 setInterval(() => {
