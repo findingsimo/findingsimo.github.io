@@ -117,34 +117,94 @@ class LogoPrinter {
         try {
             console.log('Requesting Bluetooth Device...');
             
-            // Request device with generic printer services
-            this.bluetoothDevice = await navigator.bluetooth.requestDevice({
-                filters: [
-                    { services: ['000018f0-0000-1000-8000-00805f9b34fb'] }, // Common printer service
-                ],
-                optionalServices: [
-                    '00001101-0000-1000-8000-00805f9b34fb', // Serial Port Profile
-                    '000018f0-0000-1000-8000-00805f9b34fb', // Printer service
-                ]
-            });
+            // First try with common thermal printer services
+            try {
+                this.bluetoothDevice = await navigator.bluetooth.requestDevice({
+                    filters: [
+                        { services: ['00001101-0000-1000-8000-00805f9b34fb'] }, // Serial Port Profile (most common)
+                    ],
+                    optionalServices: [
+                        '00001101-0000-1000-8000-00805f9b34fb', // Serial Port Profile
+                        '000018f0-0000-1000-8000-00805f9b34fb', // Generic printer service
+                        '00001800-0000-1000-8000-00805f9b34fb', // Generic Access
+                        '00001801-0000-1000-8000-00805f9b34fb', // Generic Attribute
+                    ]
+                });
+            } catch (firstError) {
+                console.log('First attempt failed, trying with broader filter...');
+                
+                // Fallback: try with name/namePrefix filter for common printer brands
+                this.bluetoothDevice = await navigator.bluetooth.requestDevice({
+                    filters: [
+                        { namePrefix: 'POS-' },
+                        { namePrefix: 'TM-' },
+                        { namePrefix: 'TSP' },
+                        { namePrefix: 'SRP' },
+                        { namePrefix: 'HOP' },
+                        { namePrefix: 'BT-' },
+                        { namePrefix: 'PT-' },
+                        { namePrefix: 'Printer' },
+                        { services: ['00001101-0000-1000-8000-00805f9b34fb'] }
+                    ],
+                    optionalServices: [
+                        '00001101-0000-1000-8000-00805f9b34fb',
+                        '000018f0-0000-1000-8000-00805f9b34fb',
+                        '00001800-0000-1000-8000-00805f9b34fb',
+                        '00001801-0000-1000-8000-00805f9b34fb',
+                    ]
+                });
+            }
 
+            console.log('Selected device:', this.bluetoothDevice.name);
             console.log('Connecting to GATT Server...');
             const server = await this.bluetoothDevice.gatt.connect();
             
-            console.log('Getting Service...');
-            const service = await server.getPrimaryService('000018f0-0000-1000-8000-00805f9b34fb');
+            console.log('Getting available services...');
+            const services = await server.getPrimaryServices();
+            console.log('Available services:', services.map(s => s.uuid));
             
-            console.log('Getting Characteristic...');
-            this.bluetoothCharacteristic = await service.getCharacteristic('00002af1-0000-1000-8000-00805f9b34fb');
+            // Try to find a writable characteristic in available services
+            let foundCharacteristic = null;
             
+            for (const service of services) {
+                try {
+                    console.log(`Checking service: ${service.uuid}`);
+                    const characteristics = await service.getCharacteristics();
+                    
+                    for (const char of characteristics) {
+                        console.log(`  Characteristic: ${char.uuid}, properties:`, char.properties);
+                        
+                        // Look for a characteristic that supports writing
+                        if (char.properties.write || char.properties.writeWithoutResponse) {
+                            foundCharacteristic = char;
+                            console.log('Found writable characteristic:', char.uuid);
+                            break;
+                        }
+                    }
+                    
+                    if (foundCharacteristic) break;
+                } catch (serviceError) {
+                    console.log(`Error accessing service ${service.uuid}:`, serviceError);
+                }
+            }
+            
+            if (!foundCharacteristic) {
+                throw new Error('No writable characteristic found. This device may not support printing.');
+            }
+            
+            this.bluetoothCharacteristic = foundCharacteristic;
             this.isConnected = true;
             console.log('Bluetooth printer connected successfully');
 
         } catch (error) {
+            console.error('Connection error details:', error);
+            
             if (error.name === 'NotFoundError') {
-                throw new Error('No compatible Bluetooth printer found. Make sure your printer is discoverable and supports the required services.');
+                throw new Error('No Bluetooth printer found. Make sure your printer is powered on, discoverable, and nearby.');
             } else if (error.name === 'NotAllowedError') {
                 throw new Error('Bluetooth access denied. Please allow Bluetooth access and try again.');
+            } else if (error.name === 'NetworkError') {
+                throw new Error('Connection failed. Make sure the printer is not connected to another device.');
             } else {
                 throw new Error(`Connection failed: ${error.message}`);
             }
