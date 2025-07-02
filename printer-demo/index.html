@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Printer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Logo Printer">
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Logo to Print</h1>
+        
+        <div class="logo-grid">
+            <div class="logo-box" id="avolta-box" data-logo="avolta">
+                <img src="avolta_logo_color.svg" alt="Avolta Logo" class="logo-image">
+            </div>
+            
+            <div class="logo-box" id="hermes-box" data-logo="hermes">
+                <img src="hermes-logo.svg" alt="Hermes Logo" class="logo-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Sheet -->
+    <div class="bottom-sheet" id="bottom-sheet">
+        <div class="bottom-sheet-content">
+            <h3>Print this image?</h3>
+            <div class="button-group">
+                <button class="btn btn-cancel" id="cancel-btn">Cancel</button>
+                <button class="btn btn-print" id="print-btn">Print</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

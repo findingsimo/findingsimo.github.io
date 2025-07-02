@@ -1,0 +1,26 @@
+{
+  "name": "Logo Printer",
+  "short_name": "LogoPrinter",
+  "description": "Print logos via Bluetooth thermal printer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#3498db",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMzNDk4ZGIiLz4KPHN2ZyB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CjxwYXRoIGQ9Im02IDljMCAxIDAgMTAgMiAyIDIgMCA0IDAgNC0yIDAtMSAwLTEwLTEtMTF6bS0yIDJ2NGEyIDIgMCAwIDEtMiAyaC0yeiIvPgo8cGF0aCBkPSJNNiAxMXYzYTIgMiAwIDAgMS0yIDJoLTJ2LTNhMiAyIDAgMCAxIDItMmgyeiIvPgo8cGF0aCBkPSJtNiAxNCA4IDZoMnYtM2EyIDIgMCAwIDEgMi0yaDJ2LTNhMiAyIDAgMCAxLTItMmgtMnYtM2EyIDIgMCAwIDEtMi0yaC0ydi0zeiIvPgo8L3N2Zz4KPC9zdmc+",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNjQiIGZpbGw9IiMzNDk4ZGIiLz4KPHN2ZyB4PSIxMjgiIHk9IjEyOCIgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgo8cGF0aCBkPSJtNiA5YzAgMSAwIDEwIDIgMiAyIDAgNCAwIDQtMiAwLTEgMC0xMC0xLTExem0tMiAydjRhMiAyIDAgMCAxLTIgMmgtMnoiLz4KPHBhdGggZD0iTTYgMTF2M2EyIDIgMCAwIDEtMiAyaC0ydi0zYTIgMiAwIDAgMSAyLTJoMnoiLz4KPHBhdGggZD0ibTYgMTQgOCA2aDJ2LTNhMiAyIDAgMCAxIDItMmgydi0zYTIgMiAwIDAgMS0yLTJoLTJ2LTNhMiAyIDAgMCAxLTItMmgtMnYtM3oiLz4KPC9zdmc+Cjwvc3ZnPg==",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "lang": "en",
+  "scope": "/",
+  "prefer_related_applications": false
+} 

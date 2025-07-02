@@ -1,0 +1,17 @@
+{
+  "name": "logo-printer-app",
+  "version": "1.0.0",
+  "description": "Mobile web app for bluetooth logo printing",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8004",
+    "start-win": "python -m http.server 8004",
+    "dev": "npx http-server -p 8004 -o"
+  },
+  "keywords": ["bluetooth", "printing", "mobile", "logos", "web-app"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+} 
