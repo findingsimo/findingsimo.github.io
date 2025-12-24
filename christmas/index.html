@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joakim's Christmas F1 Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f0ece4;
+            --glass: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: rgba(0, 0, 0, 0.06);
+            --text: #2a2825;
+            --text-light: #6a665e;
+            --accent: #c41e3a;
+            --accent-light: #e8394f;
+            --correct: #2d8a4e;
+            --wrong: #c41e3a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1816;
+                --glass: rgba(45, 42, 38, 0.7);
+                --glass-border: rgba(70, 65, 58, 0.6);
+                --glass-shadow: rgba(0, 0, 0, 0.25);
+                --text: #f0ece4;
+                --text-light: #a8a49c;
+                --accent: #e8394f;
+                --accent-light: #ff5a6e;
+                --correct: #3da864;
+                --wrong: #e8394f;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #e8e4dc 0%, #f5f0e8 50%, #ebe6de 100%);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(145deg, #1a1816 0%, #252220 50%, #1e1c1a 100%);
+            }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .title span {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Main container */
+        .container {
+            width: min(500px, 95vw);
+        }
+
+        /* ==================== VINYL SECTION ==================== */
+        .vinyl-section {
+            margin-bottom: 40px;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Vinyl Player */
+        .vinyl-player {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 15px 25px 15px 70px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px var(--glass-shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            height: 96px;
+            max-width: 400px;
+            margin: 0 auto;
+            margin-left: 55px;
+            position: relative;
+        }
+
+        /* Vinyl Record */
+        .vinyl-container {
+            position: absolute;
+            left: -55px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 110px;
+            height: 110px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .vinyl {
+            width: 110px;
+            height: 110px;
+            background: 
+                radial-gradient(circle at center, #1a1a1a 0%, #1a1a1a 15%, transparent 15%),
+                radial-gradient(circle at center, #333 20%, transparent 20%),
+                repeating-radial-gradient(circle at center, #1a1a1a 0px, #1a1a1a 2px, #222 2px, #222 4px);
+            border-radius: 50%;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.3),
+                inset 0 0 30px rgba(0,0,0,0.3);
+            position: relative;
+            transition: transform 0.3s ease, filter 0.2s ease;
+            overflow: hidden;
+        }
+
+        .vinyl-container:hover .vinyl {
+            filter: brightness(1.1);
+        }
+
+        .vinyl.spinning {
+            animation: spin 3s linear infinite;
+        }
+
+        .vinyl.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Vinyl label */
+        .vinyl-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
+        }
+
+        .vinyl-label::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #1a1a1a;
+            border-radius: 50%;
+        }
+
+        /* Pause indicator on vinyl */
+        .vinyl-container::after {
+            content: '❚❚';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .vinyl-container:hover::after {
+            opacity: 0.8;
+        }
+
+        .vinyl-container.is-paused::after {
+            content: '▶';
+        }
+
+        /* Vinyl reflection */
+        .vinyl::before {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: 10%;
+            width: 30%;
+            height: 20%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            border-radius: 50%;
+        }
+
+        /* Now Playing Info */
+        .now-playing {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .now-playing-label {
+            font-size: 0.65rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 8px;
+        }
+
+        .song-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .song-artist {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .no-song {
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Record Selector */
+        .record-selector {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .record-btn {
+            width: 56px;
+            height: 56px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .record-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .record-btn.active {
+            transform: scale(1.15);
+        }
+
+        .record-btn.active .mini-vinyl {
+            box-shadow: 0 0 0 3px var(--accent), 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .record-btn .mini-vinyl {
+            width: 48px;
+            height: 48px;
+            background: 
+                radial-gradient(circle at center, var(--record-color, #c41e3a) 0%, var(--record-color, #c41e3a) 25%, #1a1a1a 25%),
+                repeating-radial-gradient(circle at center, #1a1a1a 0px, #1a1a1a 1px, #252525 1px, #252525 2px);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .record-btn:nth-child(1) .mini-vinyl { --record-color: #c41e3a; }
+        .record-btn:nth-child(2) .mini-vinyl { --record-color: #2d8a4e; }
+        .record-btn:nth-child(3) .mini-vinyl { --record-color: #d4a03a; }
+        .record-btn:nth-child(4) .mini-vinyl { --record-color: #4a7c9b; }
+        .record-btn:nth-child(5) .mini-vinyl { --record-color: #8b5a8b; }
+
+        /* Tooltip for song title */
+        .record-btn .tooltip {
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text);
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            padding: 4px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 8px var(--glass-shadow);
+            z-index: 10;
+        }
+
+        .record-btn:hover .tooltip {
+            opacity: 1;
+        }
+
+        .record-btn.active .tooltip {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        /* ==================== QUIZ SECTION ==================== */
+        .quiz-section {
+            display: none;
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        .quiz-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px var(--glass-shadow);
+            margin-bottom: 20px;
+        }
+
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .quiz-progress-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .quiz-score {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .question {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text);
+            text-align: left;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--glass-shadow);
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateX(5px);
+        }
+
+        .option-btn:active:not(:disabled) {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .option-btn.correct {
+            background: var(--correct);
+            color: white;
+            border-color: var(--correct);
+            box-shadow: 0 4px 15px rgba(45, 138, 78, 0.25);
+        }
+
+        .option-btn.wrong {
+            background: var(--wrong);
+            color: white;
+            border-color: var(--wrong);
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.25);
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+            opacity: 0.6;
+        }
+
+        /* Next button */
+        .next-btn {
+            display: none;
+            width: 100%;
+            background: var(--accent);
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .next-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.25);
+        }
+
+        .next-btn.visible {
+            display: block;
+        }
+
+        /* ==================== RESULTS ==================== */
+        .results-section {
+            display: none;
+            text-align: center;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .results-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px var(--glass-shadow);
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .results-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .results-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .results-message {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .restart-btn {
+            background: var(--accent);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .restart-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.25);
+        }
+
+        /* ==================== START SECTION ==================== */
+        .start-section {
+            text-align: center;
+        }
+
+        .start-section.hidden {
+            display: none;
+        }
+
+        .start-message {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .start-btn {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 15px 40px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: not-allowed;
+            opacity: 0.6;
+            box-shadow: 0 2px 10px var(--glass-shadow);
+            transition: all 0.2s ease;
+        }
+
+        .start-btn.ready {
+            cursor: pointer;
+            opacity: 1;
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.2);
+        }
+
+        .start-btn.ready:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.25);
+        }
+
+        /* Hidden YouTube player */
+        #youtube-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* F1 decoration */
+        .f1-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* Dark mode overrides for hardcoded colors */
+        @media (prefers-color-scheme: dark) {
+            .option-btn {
+                background: rgba(45, 42, 38, 0.6);
+                border-color: rgba(70, 65, 58, 0.6);
+            }
+
+            .option-btn:hover:not(:disabled) {
+                background: rgba(60, 55, 48, 0.8);
+            }
+
+            .option-btn:active:not(:disabled) {
+                background: rgba(70, 65, 58, 0.9);
+            }
+
+            .start-btn {
+                background: rgba(45, 42, 38, 0.6);
+                border-color: rgba(70, 65, 58, 0.6);
+            }
+
+            .record-btn .tooltip {
+                border: 1px solid var(--glass-border);
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 550px) {
+            body {
+                padding: 25px 15px;
+            }
+
+            .vinyl-player {
+                flex-direction: row;
+                text-align: left;
+                padding: 12px 20px;
+                gap: 15px;
+                height: 100px;
+                margin-left: 40px;
+            }
+
+            .vinyl-container {
+                width: 80px;
+                height: 80px;
+                left: -40px;
+            }
+
+            .vinyl {
+                width: 80px;
+                height: 80px;
+            }
+
+            .vinyl-label {
+                width: 26px;
+                height: 26px;
+            }
+
+            .now-playing {
+                width: 100%;
+                margin-left: 32px;
+            }
+
+            .record-selector {
+                gap: 8px;
+            }
+
+            .record-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            .record-btn .mini-vinyl {
+                width: 40px;
+                height: 40px;
+            }
+
+            .record-btn .tooltip {
+                font-size: 0.6rem;
+                padding: 3px 8px;
+                bottom: -28px;
+            }
+
+            .quiz-card {
+                padding: 20px;
+            }
+
+            .question {
+                font-size: 1rem;
+            }
+
+            .option-btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+
+            .start-message {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="title"><span>Joakim's</span> Christmas F1 Quiz</h1>
+        <p class="subtitle">Merry Christmas 2025</p>
+    </header>
+
+    <div class="container">
+        <!-- Vinyl Section -->
+        <section class="vinyl-section">
+            <div class="vinyl-player">
+                <div class="vinyl-container">
+                    <div class="vinyl" id="vinyl">
+                        <div class="vinyl-label"></div>
+                    </div>
+                </div>
+                <div class="now-playing">
+                    <p class="now-playing-label">♪ Christmas Tunes</p>
+                    <p class="song-title" id="songTitle"><span class="no-song">Select a record...</span></p>
+                    <p class="song-artist" id="songArtist"></p>
+                </div>
+            </div>
+
+            <div class="record-selector" id="recordSelector">
+                <!-- Records will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Start Section -->
+        <section class="start-section" id="startSection">
+            <p class="start-message">
+                Pick a Christmas tune to set the mood, then test your Formula 1 knowledge with 10 questions!
+            </p>
+            <button class="start-btn" id="startBtn" disabled>Start Quiz</button>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="quiz-section" id="quizSection">
+            <div class="quiz-card">
+                <div class="quiz-progress">
+                    <span class="quiz-progress-text">Question <span id="currentQ">1</span>/10</span>
+                    <span class="quiz-score">Score: <span id="score">0</span></span>
+                </div>
+                <p class="question" id="question"></p>
+                <div class="options" id="options"></div>
+            </div>
+            <button class="next-btn" id="nextBtn">Next Question</button>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection">
+            <div class="results-card">
+                <h2 class="results-title">Quiz Complete! 🏁</h2>
+                <p class="results-score" id="finalScore">0/10</p>
+                <p class="results-label">Correct Answers</p>
+                <p class="results-message" id="resultsMessage"></p>
+                <button class="restart-btn" id="restartBtn">Play Again</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hidden YouTube Player -->
+    <div id="youtube-player"></div>
+
+    <script>
+        // Christmas songs
+        const songs = [
+            { title: "Last Christmas", artist: "Wham!", videoId: "E8gmARGvPlI" },
+            { title: "All I Want for Christmas", artist: "Mariah Carey", videoId: "aAkMkVFwAoo" },
+            { title: "Driving Home for Christmas", artist: "Chris Rea", videoId: "EvbVfoUuoxs" },
+            { title: "Fairytale of New York", artist: "The Pogues", videoId: "j9jbdgZidu8" },
+            { title: "Rockin' Around the Tree", artist: "Brenda Lee", videoId: "1qYz7rfgLWE" }
+        ];
+
+        // F1 Quiz Questions (2025 season)
+        const quizQuestions = [
+            {
+                question: "Who won the 2025 Formula 1 World Drivers' Championship?",
+                options: ["Lando Norris", "Oscar Piastri", "Max Verstappen", "Charles Leclerc"],
+                correct: 0
+            },
+            {
+                question: "Which team won the 2025 Constructors' Championship?",
+                options: ["McLaren", "Ferrari", "Red Bull Racing", "Mercedes"],
+                correct: 0
+            },
+            {
+                question: "Lewis Hamilton drove for which team in 2025?",
+                options: ["Mercedes", "Red Bull", "Ferrari", "Aston Martin"],
+                correct: 2
+            },
+            {
+                question: "Which driver made their F1 debut with Alpine in 2025?",
+                options: ["Oscar Piastri", "Franco Colapinto", "Liam Lawson", "Oliver Bearman"],
+                correct: 1
+            },
+            {
+                question: "At which circuit did McLaren secure a notable 1-2 finish in 2025?",
+                options: ["Silverstone", "Monza", "Belgium", "Singapore"],
+                correct: 2
+            },
+            {
+                question: "How many race wins did Lando Norris achieve in 2025?",
+                options: ["5", "6", "7", "8"],
+                correct: 2
+            },
+            {
+                question: "Which team did Adrian Newey join in 2025?",
+                options: ["Ferrari", "McLaren", "Aston Martin", "Mercedes"],
+                correct: 2
+            },
+            {
+                question: "Who was a key driver for RB in 2025 after replacing Daniel Ricciardo?",
+                options: ["Liam Lawson", "Nyck de Vries", "Oliver Bearman", "Jack Doohan"],
+                correct: 0
+            },
+            {
+                question: "The 2025 F1 calendar started with which Grand Prix after calendar changes?",
+                options: ["Bahrain GP", "Australian GP", "Chinese GP", "Japanese GP"],
+                correct: 1
+            },
+            {
+                question: "Carlos Sainz drove for which team in 2025?",
+                options: ["Audi", "Williams", "Alpine", "Haas"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+        let player = null;
+        let currentSongIndex = -1;
+
+        // Initialize YouTube API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '1',
+                width: '1',
+                playerVars: { autoplay: 0, controls: 0 },
+                events: { onReady: () => {}, onStateChange: onPlayerStateChange }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                // Play next song or loop
+                const nextIndex = (currentSongIndex + 1) % songs.length;
+                playSong(nextIndex);
+            }
+        }
+
+        // Create record buttons
+        const selector = document.getElementById('recordSelector');
+        songs.forEach((song, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'record-btn';
+            btn.innerHTML = `
+                <div class="mini-vinyl"></div>
+                <span class="tooltip">${song.title}</span>
+            `;
+            btn.addEventListener('click', () => playSong(index));
+            selector.appendChild(btn);
+        });
+
+        // Vinyl click to pause/play
+        const vinylContainer = document.querySelector('.vinyl-container');
+        const vinyl = document.getElementById('vinyl');
+        let isPaused = false;
+
+        vinylContainer.addEventListener('click', () => {
+            if (currentSongIndex === -1) return;
+            
+            if (isPaused) {
+                // Resume
+                player.playVideo();
+                vinyl.classList.remove('paused');
+                vinylContainer.classList.remove('is-paused');
+                isPaused = false;
+            } else {
+                // Pause
+                player.pauseVideo();
+                vinyl.classList.add('paused');
+                vinylContainer.classList.add('is-paused');
+                isPaused = true;
+            }
+        });
+
+        function playSong(index) {
+            currentSongIndex = index;
+            const song = songs[index];
+
+            // Reset pause state
+            isPaused = false;
+            vinyl.classList.remove('paused');
+            vinylContainer.classList.remove('is-paused');
+
+            // Update UI
+            document.querySelectorAll('.record-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+
+            document.getElementById('songTitle').innerHTML = song.title;
+            document.getElementById('songArtist').textContent = song.artist;
+            document.getElementById('vinyl').classList.add('spinning');
+
+            // Enable start button
+            const startBtn = document.getElementById('startBtn');
+            startBtn.disabled = false;
+            startBtn.classList.add('ready');
+
+            // Play music
+            if (player && player.loadVideoById) {
+                player.loadVideoById(song.videoId);
+                player.setVolume(30);
+            }
+        }
+
+        // Start Quiz
+        document.getElementById('startBtn').addEventListener('click', function() {
+            if (this.disabled) return;
+            document.getElementById('startSection').classList.add('hidden');
+            document.getElementById('quizSection').classList.add('active');
+            showQuestion();
+        });
+
+        function showQuestion() {
+            answered = false;
+            const q = quizQuestions[currentQuestion];
+            
+            document.getElementById('currentQ').textContent = currentQuestion + 1;
+            document.getElementById('question').textContent = q.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.addEventListener('click', () => selectAnswer(index));
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('nextBtn').classList.remove('visible');
+        }
+
+        function selectAnswer(index) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizQuestions[currentQuestion];
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.correct) {
+                    btn.classList.add('correct');
+                } else if (i === index) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            if (index === q.correct) {
+                score++;
+                document.getElementById('score').textContent = score;
+            }
+
+            // Show next button or results
+            if (currentQuestion < quizQuestions.length - 1) {
+                document.getElementById('nextBtn').classList.add('visible');
+            } else {
+                setTimeout(showResults, 1500);
+            }
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            currentQuestion++;
+            showQuestion();
+        });
+
+        function showResults() {
+            document.getElementById('quizSection').classList.remove('active');
+            document.getElementById('resultsSection').classList.add('active');
+            
+            document.getElementById('finalScore').textContent = `${score}/10`;
+            
+            let message = '';
+            if (score === 10) {
+                message = "Perfect score! 🏆 You're a true F1 expert, Joakim! Merry Christmas!";
+            } else if (score >= 8) {
+                message = "Excellent! 🥇 You really know your F1! Merry Christmas, Joakim!";
+            } else if (score >= 6) {
+                message = "Great job! 🥈 Solid F1 knowledge! Merry Christmas, Joakim!";
+            } else if (score >= 4) {
+                message = "Not bad! 🥉 Keep watching those races! Merry Christmas, Joakim!";
+            } else {
+                message = "Time to catch up on some races! 🏎️ Merry Christmas anyway, Joakim!";
+            }
+            
+            document.getElementById('resultsMessage').textContent = message;
+        }
+
+        document.getElementById('restartBtn').addEventListener('click', function() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('score').textContent = '0';
+            document.getElementById('resultsSection').classList.remove('active');
+            document.getElementById('quizSection').classList.add('active');
+            showQuestion();
+        });
+    </script>
+</body>
+</html>
