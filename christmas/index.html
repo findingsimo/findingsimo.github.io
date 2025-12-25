@@ -113,8 +113,6 @@
             align-items: center;
             gap: 20px;
             height: 96px;
-            max-width: 400px;
-            margin: 0 auto;
             margin-left: 55px;
             position: relative;
         }
@@ -308,6 +306,7 @@
         .record-btn:nth-child(3) .mini-vinyl { --record-color: #d4a03a; }
         .record-btn:nth-child(4) .mini-vinyl { --record-color: #4a7c9b; }
         .record-btn:nth-child(5) .mini-vinyl { --record-color: #8b5a8b; }
+        .record-btn:nth-child(6) .mini-vinyl { --record-color: #e85d04; }
 
         /* Tooltip for song title */
         .record-btn .tooltip {
@@ -766,11 +765,12 @@
     <script>
         // Christmas songs
         const songs = [
+            { title: "Come On Santa", artist: "The Raveonettes", videoId: "nvsZFO2j_dY" },
+            { title: "Rockin' Around the Tree", artist: "Brenda Lee", videoId: "1qYz7rfgLWE" },
+            { title: "Happy Xmas (War Is Over)", artist: "John Lennon", videoId: "yN4Uu0OlmTg" },
+            { title: "Little Saint Nick", artist: "The Beach Boys", videoId: "AbgxDgVmMF0" },
             { title: "Last Christmas", artist: "Wham!", videoId: "E8gmARGvPlI" },
-            { title: "All I Want for Christmas", artist: "Mariah Carey", videoId: "aAkMkVFwAoo" },
-            { title: "Driving Home for Christmas", artist: "Chris Rea", videoId: "EvbVfoUuoxs" },
-            { title: "Fairytale of New York", artist: "The Pogues", videoId: "j9jbdgZidu8" },
-            { title: "Rockin' Around the Tree", artist: "Brenda Lee", videoId: "1qYz7rfgLWE" }
+            { title: "Fairytale of New York", artist: "The Pogues", videoId: "j9jbdgZidu8" }
         ];
 
         // F1 Quiz Questions (2025 season)
