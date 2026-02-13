@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" width="1500" height="2100">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="700" fill="#FFF0EB" />
+
+  <!-- Pixel border (outer) -->
+  <rect x="12" y="12" width="476" height="676" fill="none" stroke="#7B2D4A" stroke-width="6" />
+  <!-- Pixel border (inner accent) -->
+  <rect x="22" y="22" width="456" height="656" fill="none" stroke="#E8536D" stroke-width="2" />
+
+  <!-- Pixel heart at top (10x8 grid, 10px blocks, symmetric) -->
+  <g transform="translate(200, 50)">
+    <!-- Row 0: ..XX..XX.. -->
+    <rect x="20" y="0" width="10" height="10" fill="#E8536D"/>
+    <rect x="30" y="0" width="10" height="10" fill="#E8536D"/>
+    <rect x="60" y="0" width="10" height="10" fill="#E8536D"/>
+    <rect x="70" y="0" width="10" height="10" fill="#E8536D"/>
+    <!-- Row 1: .XXXXXXXX. -->
+    <rect x="10" y="10" width="10" height="10" fill="#E8536D"/>
+    <rect x="20" y="10" width="10" height="10" fill="#F4845F"/>
+    <rect x="30" y="10" width="10" height="10" fill="#E8536D"/>
+    <rect x="40" y="10" width="10" height="10" fill="#E8536D"/>
+    <rect x="50" y="10" width="10" height="10" fill="#E8536D"/>
+    <rect x="60" y="10" width="10" height="10" fill="#E8536D"/>
+    <rect x="70" y="10" width="10" height="10" fill="#E8536D"/>
+    <rect x="80" y="10" width="10" height="10" fill="#E8536D"/>
+    <!-- Row 2: XXXXXXXXXX -->
+    <rect x="0"  y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="10" y="20" width="10" height="10" fill="#F4845F"/>
+    <rect x="20" y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="30" y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="40" y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="50" y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="60" y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="70" y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="80" y="20" width="10" height="10" fill="#E8536D"/>
+    <rect x="90" y="20" width="10" height="10" fill="#E8536D"/>
+    <!-- Row 3: XXXXXXXXXX -->
+    <rect x="0"  y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="10" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="20" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="30" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="40" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="50" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="60" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="70" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="80" y="30" width="10" height="10" fill="#E8536D"/>
+    <rect x="90" y="30" width="10" height="10" fill="#E8536D"/>
+    <!-- Row 4: .XXXXXXXX. -->
+    <rect x="10" y="40" width="10" height="10" fill="#E8536D"/>
+    <rect x="20" y="40" width="10" height="10" fill="#E8536D"/>
+    <rect x="30" y="40" width="10" height="10" fill="#E8536D"/>
+    <rect x="40" y="40" width="10" height="10" fill="#E8536D"/>
+    <rect x="50" y="40" width="10" height="10" fill="#E8536D"/>
+    <rect x="60" y="40" width="10" height="10" fill="#E8536D"/>
+    <rect x="70" y="40" width="10" height="10" fill="#E8536D"/>
+    <rect x="80" y="40" width="10" height="10" fill="#E8536D"/>
+    <!-- Row 5: ..XXXXXX.. -->
+    <rect x="20" y="50" width="10" height="10" fill="#E8536D"/>
+    <rect x="30" y="50" width="10" height="10" fill="#E8536D"/>
+    <rect x="40" y="50" width="10" height="10" fill="#E8536D"/>
+    <rect x="50" y="50" width="10" height="10" fill="#E8536D"/>
+    <rect x="60" y="50" width="10" height="10" fill="#E8536D"/>
+    <rect x="70" y="50" width="10" height="10" fill="#E8536D"/>
+    <!-- Row 6: ...XXXX... -->
+    <rect x="30" y="60" width="10" height="10" fill="#E8536D"/>
+    <rect x="40" y="60" width="10" height="10" fill="#E8536D"/>
+    <rect x="50" y="60" width="10" height="10" fill="#E8536D"/>
+    <rect x="60" y="60" width="10" height="10" fill="#E8536D"/>
+    <!-- Row 7: ....XX.... -->
+    <rect x="40" y="70" width="10" height="10" fill="#E8536D"/>
+    <rect x="50" y="70" width="10" height="10" fill="#E8536D"/>
+  </g>
+
+  <!-- "Happy" -->
+  <text x="250" y="180" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="32" fill="#E8536D" letter-spacing="-1">Happy</text>
+
+  <!-- "Valentine's" -->
+  <text x="250" y="235" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="28" fill="#F4845F" letter-spacing="-1">Valentine's</text>
+
+  <!-- "Day" -->
+  <text x="250" y="285" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="32" fill="#E8536D" letter-spacing="-1">Day</text>
+
+  <!-- Decorative pixel dots row -->
+  <g fill="#F7B267">
+    <rect x="120" y="310" width="6" height="6"/>
+    <rect x="155" y="310" width="6" height="6"/>
+    <rect x="190" y="310" width="6" height="6"/>
+    <rect x="225" y="310" width="6" height="6"/>
+    <rect x="247" y="306" width="10" height="10" fill="#E8536D"/>
+    <rect x="271" y="310" width="6" height="6"/>
+    <rect x="306" y="310" width="6" height="6"/>
+    <rect x="341" y="310" width="6" height="6"/>
+    <rect x="376" y="310" width="6" height="6"/>
+  </g>
+
+  <!-- QR Code -->
+  <g transform="translate(130, 350) scale(9.6)">
+    <path stroke="#7B2D4A" fill="none" d="M0 0.5h7m1 0h3m1 0h1m1 0h1m3 0h7M0 1.5h1m5 0h1m1 0h6m2 0h1m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m2 0h6m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m2 0h2m1 0h2m1 0h2m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m3 0h3m1 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m2 0h1m2 0h3m3 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 7.5h2m1 0h1m1 0h1M0 8.5h1m2 0h6m2 0h2m2 0h1m1 0h1m2 0h1m1 0h3M0 9.5h1m1 0h4m2 0h3m1 0h4m3 0h5M3 10.5h4m2 0h5m1 0h3m3 0h1m2 0h1M0 11.5h1m1 0h4m2 0h2m2 0h1m2 0h1m2 0h2m1 0h4M0 12.5h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h2m1 0h2m4 0h1M0 13.5h3m2 0h1m1 0h1m4 0h5m3 0h1m2 0h1M0 14.5h2m4 0h1m1 0h1m1 0h1m1 0h1m2 0h3m2 0h5M0 15.5h1m2 0h3m2 0h2m5 0h1m3 0h1m1 0h2m1 0h1M0 16.5h1m1 0h3m1 0h2m1 0h5m2 0h5m1 0h2M8 17.5h1m4 0h1m2 0h1m3 0h1m1 0h2M0 18.5h7m1 0h1m1 0h3m3 0h1m1 0h1m1 0h1m3 0h1M0 19.5h1m5 0h1m1 0h2m3 0h1m1 0h2m3 0h1M0 20.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h7M0 21.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h6m4 0h2M0 22.5h1m1 0h3m1 0h1m3 0h2m3 0h3m2 0h5M0 23.5h1m5 0h1m3 0h1m3 0h1m3 0h3m1 0h3M0 24.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m2 0h1m2 0h1"/>
+  </g>
+
+  <!-- "Scan me" text below QR -->
+  <text x="250" y="610" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="10" fill="#F4845F" letter-spacing="1">scan me</text>
+
+  <!-- Small pixel hearts at bottom -->
+  <g fill="#F7B267" opacity="0.6">
+    <!-- Left heart -->
+    <rect x="70" y="635" width="5" height="5"/>
+    <rect x="80" y="635" width="5" height="5"/>
+    <rect x="65" y="640" width="5" height="5"/>
+    <rect x="70" y="640" width="5" height="5"/>
+    <rect x="75" y="640" width="5" height="5"/>
+    <rect x="80" y="640" width="5" height="5"/>
+    <rect x="85" y="640" width="5" height="5"/>
+    <rect x="70" y="645" width="5" height="5"/>
+    <rect x="75" y="645" width="5" height="5"/>
+    <rect x="80" y="645" width="5" height="5"/>
+    <rect x="75" y="650" width="5" height="5"/>
+    <!-- Right heart -->
+    <rect x="405" y="635" width="5" height="5"/>
+    <rect x="415" y="635" width="5" height="5"/>
+    <rect x="400" y="640" width="5" height="5"/>
+    <rect x="405" y="640" width="5" height="5"/>
+    <rect x="410" y="640" width="5" height="5"/>
+    <rect x="415" y="640" width="5" height="5"/>
+    <rect x="420" y="640" width="5" height="5"/>
+    <rect x="405" y="645" width="5" height="5"/>
+    <rect x="410" y="645" width="5" height="5"/>
+    <rect x="415" y="645" width="5" height="5"/>
+    <rect x="410" y="650" width="5" height="5"/>
+  </g>
+
+  <!-- Footer text -->
+  <text x="250" y="670" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="7" fill="#7B2D4A" opacity="0.4">findingsimo.com/td</text>
+</svg>

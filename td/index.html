@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#E8536D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Thinzar's Day</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23E8536D' width='100' height='100' rx='12'/><rect fill='%23fff' x='25' y='30' width='20' height='20'/><rect fill='%23fff' x='55' y='30' width='20' height='20'/><rect fill='%23fff' x='15' y='40' width='70' height='20'/><rect fill='%23fff' x='25' y='55' width='50' height='15'/><rect fill='%23fff' x='35' y='65' width='30' height='10'/><rect fill='%23fff' x='42' y='72' width='16' height='8'/></svg>">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackernoon/pixel-icon-library/fonts/iconfont.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- HOME SCREEN -->
+  <div id="screen-home" class="screen active">
+    <div class="container">
+      <h1 class="greeting">Hi Thinzar! <i class="hn hn-heart-solid"></i></h1>
+      <p class="subtitle">Your 30-Day Step Challenge</p>
+
+      <div class="progress-track">
+        <canvas id="progress-canvas" width="380" height="100"></canvas>
+        <p class="progress-label" id="progress-label">0/30 hearts</p>
+      </div>
+
+      <div id="makeup-notice" class="makeup-notice hidden">
+        <p>Looks like you missed yesterday! Enter yesterday's steps first:</p>
+      </div>
+
+      <div id="today-notice" class="today-notice hidden">
+        <p>Now enter today's steps:</p>
+      </div>
+
+      <div id="already-entered" class="already-entered hidden">
+        <p>You've already entered your steps for today. Come back tomorrow!</p>
+      </div>
+
+      <div id="input-section">
+        <label for="steps-input" class="input-label" id="input-label">How many steps today?</label>
+        <div class="input-wrapper">
+          <input type="number" id="steps-input" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 12500" min="0" max="200000" autocomplete="off">
+        </div>
+        <button id="submit-btn" class="btn btn-primary">Let's see! <i class="hn hn-sparkles-solid"></i></button>
+      </div>
+
+      <div id="hearts-gallery" class="hearts-gallery">
+        <h3>Your Hearts</h3>
+        <div id="hearts-grid" class="hearts-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS SCREEN -->
+  <div id="screen-success" class="screen">
+    <div class="container">
+      <div class="reveal-animation">
+        <h2 class="success-title">You did it!</h2>
+        <p class="success-subtitle" id="success-steps"></p>
+        <div class="card-container">
+          <canvas id="heart-canvas" width="540" height="960"></canvas>
+        </div>
+        <div class="actions">
+          <a id="song-btn" class="btn btn-song" href="#" target="_blank" rel="noopener">
+            <span class="song-btn-icon"><i class="hn hn-music-solid"></i></span>
+            <span class="song-btn-label" id="song-btn-label">Play Your Surprise Song</span>
+            <span class="song-btn-detail" id="song-btn-detail"></span>
+          </a>
+          <a id="playlist-btn" class="btn btn-song btn-gold hidden" href="https://open.spotify.com/playlist/2rHLS9OGWA97k1MqWbUK0O?si=0926bfd8930e445e&pt=ce499c4f5e8195da52ee2b57d4bced2f" target="_blank" rel="noopener">
+            <span class="song-btn-icon"><i class="hn hn-music-solid"></i></span>
+            <span class="song-btn-label">Thinzar's Day</span>
+          </a>
+          <div class="action-row">
+            <button id="share-btn" class="btn btn-secondary"><i class="hn hn-share-solid"></i> Share</button>
+            <button id="save-btn" class="btn btn-secondary"><i class="hn hn-save-solid"></i> Save</button>
+          </div>
+        </div>
+      </div>
+      <button id="back-home-success" class="btn btn-link"><i class="hn hn-arrow-left"></i> Back to Home</button>
+    </div>
+  </div>
+
+  <!-- FAIL SCREEN -->
+  <div id="screen-fail" class="screen">
+    <div class="container">
+      <div class="fail-content">
+        <div class="card-container">
+          <canvas id="fail-canvas" width="540" height="960"></canvas>
+        </div>
+        <p class="fail-message" id="fail-message"></p>
+        <p class="fail-cta">Come back tomorrow to earn your <i class="hn hn-heart-solid"></i> and your <i class="hn hn-music-solid"></i></p>
+        <div class="action-row">
+          <button id="share-fail-btn" class="btn btn-secondary"><i class="hn hn-share-solid"></i> Share</button>
+          <button id="save-fail-btn" class="btn btn-secondary"><i class="hn hn-save-solid"></i> Save</button>
+        </div>
+      </div>
+      <button id="back-home-fail" class="btn btn-link"><i class="hn hn-arrow-left"></i> Back to Home</button>
+    </div>
+  </div>
+
+  <!-- COMPLETION SCREEN -->
+  <div id="screen-complete" class="screen">
+    <div class="container">
+      <div class="confetti" id="confetti"></div>
+      <h2 class="complete-title"><i class="hn hn-trophy-solid"></i> You did it, Thinzar! <i class="hn hn-trophy-solid"></i></h2>
+      <p class="complete-subtitle">30 hearts. 30 songs. All you.</p>
+      <p class="complete-message">You've completed your 30-day challenge! Every step was worth it, and so are you.</p>
+      <div class="card-container">
+        <canvas id="complete-canvas" width="540" height="960"></canvas>
+      </div>
+      <div class="actions">
+        <a id="final-song-btn" class="btn btn-song btn-gold" href="#" target="_blank" rel="noopener">
+          <span class="song-btn-icon"><i class="hn hn-music-solid"></i></span>
+          <span class="song-btn-label">Play Your Final Song</span>
+        </a>
+        <p class="song-info" id="final-song-info"></p>
+        <a class="btn btn-song btn-gold" href="https://open.spotify.com/playlist/2rHLS9OGWA97k1MqWbUK0O?si=0926bfd8930e445e&pt=ce499c4f5e8195da52ee2b57d4bced2f" target="_blank" rel="noopener" style="margin-top: 0.25rem;">
+          <span class="song-btn-icon"><i class="hn hn-music-solid"></i></span>
+          <span class="song-btn-label">Thinzar's Day</span>
+        </a>
+        <div class="action-row">
+          <button id="share-complete-btn" class="btn btn-secondary"><i class="hn hn-share-solid"></i> Share</button>
+          <button id="save-complete-btn" class="btn btn-secondary"><i class="hn hn-save-solid"></i> Save</button>
+        </div>
+      </div>
+      <div id="complete-gallery" class="hearts-gallery">
+        <h3>All Your Hearts</h3>
+        <div id="complete-hearts-grid" class="hearts-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="hearts.js"></script>
+  <script src="songs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
