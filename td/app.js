@@ -482,6 +482,35 @@ const App = (() => {
       saveCanvas(document.getElementById('complete-canvas'));
     });
 
+    // Generate apple-touch-icon from pixel heart canvas
+    (function generateTouchIcon() {
+      const HEART = [
+        [0,0,1,1,0,0,1,1,0,0],
+        [0,1,2,1,1,1,1,1,1,0],
+        [1,2,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1],
+        [0,1,1,1,1,1,1,1,1,0],
+        [0,0,1,1,1,1,1,1,0,0],
+        [0,0,0,1,1,1,1,0,0,0],
+        [0,0,0,0,1,1,0,0,0,0],
+      ];
+      const s = 180, bs = 14, ox = (s - 10*bs)/2, oy = (s - 8*bs)/2;
+      const c = document.createElement('canvas');
+      c.width = s; c.height = s;
+      const x = c.getContext('2d');
+      x.fillStyle = '#E8536D';
+      x.beginPath(); x.roundRect(0, 0, s, s, 28); x.fill();
+      HEART.forEach((row, r) => row.forEach((v, col) => {
+        if (!v) return;
+        x.fillStyle = v === 2 ? '#F4A0A8' : '#fff';
+        x.fillRect(ox + col*bs, oy + r*bs, bs, bs);
+      }));
+      const link = document.createElement('link');
+      link.rel = 'apple-touch-icon';
+      link.href = c.toDataURL('image/png');
+      document.head.appendChild(link);
+    })();
+
     // Register service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').catch(() => {});

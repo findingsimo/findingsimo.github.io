@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="16" fill="#E8536D"/>
+  <!-- 10x8 pixel heart, block=8px, offset x=10 y=18 -->
+  <!-- Row 0: ..XX..XX.. -->
+  <rect x="26" y="18" width="8" height="8" fill="#fff"/>
+  <rect x="34" y="18" width="8" height="8" fill="#fff"/>
+  <rect x="58" y="18" width="8" height="8" fill="#fff"/>
+  <rect x="66" y="18" width="8" height="8" fill="#fff"/>
+  <!-- Row 1: .XXXXXXXX. -->
+  <rect x="18" y="26" width="8" height="8" fill="#fff"/>
+  <rect x="26" y="26" width="8" height="8" fill="rgba(255,255,255,0.7)"/>
+  <rect x="34" y="26" width="8" height="8" fill="#fff"/>
+  <rect x="42" y="26" width="8" height="8" fill="#fff"/>
+  <rect x="50" y="26" width="8" height="8" fill="#fff"/>
+  <rect x="58" y="26" width="8" height="8" fill="#fff"/>
+  <rect x="66" y="26" width="8" height="8" fill="#fff"/>
+  <rect x="74" y="26" width="8" height="8" fill="#fff"/>
+  <!-- Row 2: XXXXXXXXXX -->
+  <rect x="10" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="18" y="34" width="8" height="8" fill="rgba(255,255,255,0.7)"/>
+  <rect x="26" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="34" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="42" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="50" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="58" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="66" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="74" y="34" width="8" height="8" fill="#fff"/>
+  <rect x="82" y="34" width="8" height="8" fill="#fff"/>
+  <!-- Row 3: XXXXXXXXXX -->
+  <rect x="10" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="18" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="26" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="34" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="42" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="50" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="58" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="66" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="74" y="42" width="8" height="8" fill="#fff"/>
+  <rect x="82" y="42" width="8" height="8" fill="#fff"/>
+  <!-- Row 4: .XXXXXXXX. -->
+  <rect x="18" y="50" width="8" height="8" fill="#fff"/>
+  <rect x="26" y="50" width="8" height="8" fill="#fff"/>
+  <rect x="34" y="50" width="8" height="8" fill="#fff"/>
+  <rect x="42" y="50" width="8" height="8" fill="#fff"/>
+  <rect x="50" y="50" width="8" height="8" fill="#fff"/>
+  <rect x="58" y="50" width="8" height="8" fill="#fff"/>
+  <rect x="66" y="50" width="8" height="8" fill="#fff"/>
+  <rect x="74" y="50" width="8" height="8" fill="#fff"/>
+  <!-- Row 5: ..XXXXXX.. -->
+  <rect x="26" y="58" width="8" height="8" fill="#fff"/>
+  <rect x="34" y="58" width="8" height="8" fill="#fff"/>
+  <rect x="42" y="58" width="8" height="8" fill="#fff"/>
+  <rect x="50" y="58" width="8" height="8" fill="#fff"/>
+  <rect x="58" y="58" width="8" height="8" fill="#fff"/>
+  <rect x="66" y="58" width="8" height="8" fill="#fff"/>
+  <!-- Row 6: ...XXXX... -->
+  <rect x="34" y="66" width="8" height="8" fill="#fff"/>
+  <rect x="42" y="66" width="8" height="8" fill="#fff"/>
+  <rect x="50" y="66" width="8" height="8" fill="#fff"/>
+  <rect x="58" y="66" width="8" height="8" fill="#fff"/>
+  <!-- Row 7: ....XX.... -->
+  <rect x="42" y="74" width="8" height="8" fill="#fff"/>
+  <rect x="50" y="74" width="8" height="8" fill="#fff"/>
+</svg>

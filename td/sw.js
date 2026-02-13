@@ -1,6 +1,6 @@
 // sw.js - Service Worker for offline support
 
-const CACHE_NAME = 'thinzars-day-v5';
+const CACHE_NAME = 'thinzars-day-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -8,7 +8,8 @@ const ASSETS = [
   './app.js',
   './hearts.js',
   './songs.js',
-  './manifest.json'
+  './manifest.json',
+  './icons/favicon.svg'
 ];
 
 // Install: cache all static assets
